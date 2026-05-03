@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<title>作業報告書｜三和テック</title>
+<title>菴懈･ｭ蝣ｱ蜻頑嶌・應ｸ牙柱繝・ャ繧ｯ</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 <style>
@@ -180,34 +180,34 @@ body{font-family:'Meiryo','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;bac
 </head>
 <body>
 
-<!-- ════════════ SETUP ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 SETUP 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-setup" class="view">
 <div class="setup-card">
   <div style="text-align:center;margin-bottom:24px">
-    <div style="font-size:2.5rem">🐦</div>
-    <h2 style="font-size:1.2rem;font-weight:700;color:var(--dgreen);margin-top:8px">作業報告書アプリ</h2>
-    <p style="font-size:.83rem;color:var(--muted);margin-top:4px">三和テック株式会社　初回設定</p>
+    <div style="font-size:2.5rem">凄</div>
+    <h2 style="font-size:1.2rem;font-weight:700;color:var(--dgreen);margin-top:8px">菴懈･ｭ蝣ｱ蜻頑嶌繧｢繝励Μ</h2>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:4px">荳牙柱繝・ャ繧ｯ譬ｪ蠑丈ｼ夂､ｾ縲蛻晏屓險ｭ螳・/p>
   </div>
 
   <div class="step">
     <div class="sn">1</div>
     <div class="st">
-      <h3>Supabaseに登録（無料）</h3>
-      <p><a href="https://supabase.com" target="_blank">supabase.com</a> にアクセスして「Start your project」→ 無料アカウントを作成します。</p>
+      <h3>Supabase縺ｫ逋ｻ骭ｲ・育┌譁呻ｼ・/h3>
+      <p><a href="https://supabase.com" target="_blank">supabase.com</a> 縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺励※縲郡tart your project縲坂・ 辟｡譁吶い繧ｫ繧ｦ繝ｳ繝医ｒ菴懈・縺励∪縺吶・/p>
     </div>
   </div>
   <div class="step">
     <div class="sn">2</div>
     <div class="st">
-      <h3>新しいプロジェクトを作成</h3>
-      <p>「New project」→ プロジェクト名（例: sanwa-report）を入力 → 「Create new project」をクリック。</p>
+      <h3>譁ｰ縺励＞繝励Ο繧ｸ繧ｧ繧ｯ繝医ｒ菴懈・</h3>
+      <p>縲君ew project縲坂・ 繝励Ο繧ｸ繧ｧ繧ｯ繝亥錐・井ｾ・ sanwa-report・峨ｒ蜈･蜉・竊・縲靴reate new project縲阪ｒ繧ｯ繝ｪ繝・け縲・/p>
     </div>
   </div>
   <div class="step">
     <div class="sn">3</div>
     <div class="st">
-      <h3>SQLを実行してテーブルを作成</h3>
-      <p>左メニューの「SQL Editor」→「New query」を開いて、以下をコピー＆貼り付けして「Run」を押します。</p>
+      <h3>SQL繧貞ｮ溯｡後＠縺ｦ繝・・繝悶Ν繧剃ｽ懈・</h3>
+      <p>蟾ｦ繝｡繝九Η繝ｼ縺ｮ縲郡QL Editor縲坂・縲君ew query縲阪ｒ髢九＞縺ｦ縲∽ｻ･荳九ｒ繧ｳ繝斐・・・ｲｼ繧贋ｻ倥￠縺励※縲軍un縲阪ｒ謚ｼ縺励∪縺吶・/p>
       <div class="sql-box" id="sql-text">create table reports (
   id uuid default gen_random_uuid() primary key,
   created_at timestamptz default now(),
@@ -220,7 +220,7 @@ body{font-family:'Meiryo','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;bac
   pest_other text default '',
   work_types jsonb default '[]',
   work_other text default '',
-  warranty_period text default 'なし',
+  warranty_period text default '縺ｪ縺・,
   warranty_start date,
   warranty_end date,
   notes text default '',
@@ -234,21 +234,21 @@ create policy "auth_all" on reports for all
   to authenticated using (true) with check (true);
 create policy "anon_read" on reports for select
   to anon using (true);</div>
-      <button class="btn btn-s btn-sm" onclick="copySQL()" style="margin-top:8px">📋 SQLをコピー</button>
+      <button class="btn btn-s btn-sm" onclick="copySQL()" style="margin-top:8px">搭 SQL繧偵さ繝斐・</button>
     </div>
   </div>
   <div class="step">
     <div class="sn">4</div>
     <div class="st">
-      <h3>スタッフアカウントを作成</h3>
-      <p>左メニュー「Authentication」→「Users」→「Invite user」→ スタッフのメールアドレスを入力して招待（3名分繰り返す）。招待メールのリンクからパスワードを設定します。</p>
+      <h3>繧ｹ繧ｿ繝・ヵ繧｢繧ｫ繧ｦ繝ｳ繝医ｒ菴懈・</h3>
+      <p>蟾ｦ繝｡繝九Η繝ｼ縲窟uthentication縲坂・縲袈sers縲坂・縲栗nvite user縲坂・ 繧ｹ繧ｿ繝・ヵ縺ｮ繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ繧貞・蜉帙＠縺ｦ諡帛ｾ・ｼ・蜷榊・郢ｰ繧願ｿ斐☆・峨よ魚蠕・Γ繝ｼ繝ｫ縺ｮ繝ｪ繝ｳ繧ｯ縺九ｉ繝代せ繝ｯ繝ｼ繝峨ｒ險ｭ螳壹＠縺ｾ縺吶・/p>
     </div>
   </div>
   <div class="step">
     <div class="sn">5</div>
     <div class="st">
-      <h3>APIキーを貼り付ける</h3>
-      <p>左メニュー「Project Settings」→「API」→「Project URL」と「anon public」キーをコピーして下に入力します。</p>
+      <h3>API繧ｭ繝ｼ繧定ｲｼ繧贋ｻ倥￠繧・/h3>
+      <p>蟾ｦ繝｡繝九Η繝ｼ縲訓roject Settings縲坂・縲窟PI縲坂・縲訓roject URL縲阪→縲径non public縲阪く繝ｼ繧偵さ繝斐・縺励※荳九↓蜈･蜉帙＠縺ｾ縺吶・/p>
     </div>
   </div>
 
@@ -260,252 +260,252 @@ create policy "anon_read" on reports for select
   </div>
   <div class="fg">
     <label class="fl">Anon Public Key</label>
-    <input class="fi" id="setup-key" type="text" placeholder="eyJhbGci…">
+    <input class="fi" id="setup-key" type="text" placeholder="eyJhbGci窶ｦ">
   </div>
-  <button class="btn btn-p btn-lg btn-blk" onclick="saveSetup()">設定を保存して始める</button>
-  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px">設定はこの端末に保存されます</p>
+  <button class="btn btn-p btn-lg btn-blk" onclick="saveSetup()">險ｭ螳壹ｒ菫晏ｭ倥＠縺ｦ蟋九ａ繧・/button>
+  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px">險ｭ螳壹・縺薙・遶ｯ譛ｫ縺ｫ菫晏ｭ倥＆繧後∪縺・/p>
 </div>
 </div>
 
-<!-- ════════════ LOGIN ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 LOGIN 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-login" class="view">
 <div class="login-card">
   <div style="text-align:center;margin-bottom:28px">
-    <div style="font-size:3rem">🐦</div>
-    <h2 style="font-size:1.15rem;font-weight:700;color:var(--dgreen);margin-top:8px">三和テック<br>作業報告書</h2>
-    <p style="font-size:.83rem;color:var(--muted);margin-top:6px">スタッフログイン</p>
+    <div style="font-size:3rem">凄</div>
+    <h2 style="font-size:1.15rem;font-weight:700;color:var(--dgreen);margin-top:8px">荳牙柱繝・ャ繧ｯ<br>菴懈･ｭ蝣ｱ蜻頑嶌</h2>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:6px">繧ｹ繧ｿ繝・ヵ繝ｭ繧ｰ繧､繝ｳ</p>
   </div>
   <div class="fg">
-    <label class="fl req">メールアドレス</label>
+    <label class="fl req">繝｡繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ</label>
     <input class="fi" id="l-email" type="email" placeholder="staff@example.com" autocomplete="email" value="masaya.harada1230@gmail.com">
   </div>
   <div class="fg">
-    <label class="fl req">パスワード</label>
-    <input class="fi" id="l-pw" type="password" placeholder="••••••••" autocomplete="current-password">
+    <label class="fl req">繝代せ繝ｯ繝ｼ繝・/label>
+    <input class="fi" id="l-pw" type="password" placeholder="窶｢窶｢窶｢窶｢窶｢窶｢窶｢窶｢" autocomplete="current-password">
   </div>
   <div id="l-err" style="color:var(--red);font-size:.85rem;margin-bottom:12px;display:none"></div>
-  <button class="btn btn-p btn-lg btn-blk" id="l-btn" onclick="doLogin()">ログイン</button>
+  <button class="btn btn-p btn-lg btn-blk" id="l-btn" onclick="doLogin()">繝ｭ繧ｰ繧､繝ｳ</button>
   <div style="text-align:center;margin-top:14px">
-    <button onclick="showView('setup')" style="background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:inherit">設定を変更する</button>
+    <button onclick="showView('setup')" style="background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:inherit">險ｭ螳壹ｒ螟画峩縺吶ｋ</button>
   </div>
 </div>
 </div>
 
-<!-- ════════════ DASHBOARD ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 DASHBOARD 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-dashboard" class="view">
 <div class="topbar">
-  <h1>📋 作業報告書</h1>
+  <h1>搭 菴懈･ｭ蝣ｱ蜻頑嶌</h1>
   <div class="tb-act">
-    <button class="btn btn-g btn-sm" onclick="openNewForm()">＋ 新規</button>
-    <button class="btn btn-g btn-sm" onclick="doLogout()">ログアウト</button>
+    <button class="btn btn-g btn-sm" onclick="openNewForm()">・・譁ｰ隕・/button>
+    <button class="btn btn-g btn-sm" onclick="doLogout()">繝ｭ繧ｰ繧｢繧ｦ繝・/button>
   </div>
 </div>
 <div class="search-wrap">
-  <span class="search-ico">🔍</span>
-  <input class="search-fi" id="search-fi" type="text" placeholder="お客様名・住所・害獣で検索…" oninput="filterReports()">
+  <span class="search-ico">剥</span>
+  <input class="search-fi" id="search-fi" type="text" placeholder="縺雁ｮ｢讒伜錐繝ｻ菴乗園繝ｻ螳ｳ迯｣縺ｧ讀懃ｴ｢窶ｦ" oninput="filterReports()">
 </div>
 <div class="body" style="padding-top:8px">
   <div id="rlist" class="card">
-    <div class="loading"><div class="spin"></div>読み込み中…</div>
+    <div class="loading"><div class="spin"></div>隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ窶ｦ</div>
   </div>
 </div>
-<button class="btn btn-p fab" onclick="openNewForm()">＋</button>
+<button class="btn btn-p fab" onclick="openNewForm()">・・/button>
 </div>
 
-<!-- ════════════ DETAIL ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 DETAIL 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-detail" class="view">
 <div class="topbar">
-  <h1>報告書詳細</h1>
+  <h1>蝣ｱ蜻頑嶌隧ｳ邏ｰ</h1>
   <div class="tb-act">
-    <button class="btn btn-g btn-sm" onclick="showView('dashboard')">← 一覧</button>
+    <button class="btn btn-g btn-sm" onclick="showView('dashboard')">竊・荳隕ｧ</button>
   </div>
 </div>
 <div id="detail-body" class="body"></div>
 </div>
 
-<!-- ════════════ FORM ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 FORM 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-form" class="view">
 <div class="topbar">
-  <h1 id="form-title">新規報告書</h1>
+  <h1 id="form-title">譁ｰ隕丞ｱ蜻頑嶌</h1>
   <div class="tb-act">
-    <button class="btn btn-g btn-sm" id="form-back-btn" onclick="formBack()">← 戻る</button>
+    <button class="btn btn-g btn-sm" id="form-back-btn" onclick="formBack()">竊・謌ｻ繧・/button>
   </div>
 </div>
 <div class="body">
 
   <div class="card">
-    <div class="ch">📅 基本情報</div>
+    <div class="ch">套 蝓ｺ譛ｬ諠・ｱ</div>
     <div class="cb">
       <div class="fg">
-        <label class="fl req">作業日</label>
+        <label class="fl req">菴懈･ｭ譌･</label>
         <input class="fi" id="f-date" type="date" onchange="updateWarrantyDisplay()">
       </div>
       <div class="fg">
-        <label class="fl req">担当者名</label>
-        <input class="fi" id="f-tech" type="text" placeholder="例：田中">
+        <label class="fl req">諡・ｽ楢・錐</label>
+        <input class="fi" id="f-tech" type="text" placeholder="萓具ｼ夂伐荳ｭ">
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ch">👤 お客様情報</div>
+    <div class="ch">側 縺雁ｮ｢讒俶ュ蝣ｱ</div>
     <div class="cb">
       <div class="fg">
-        <label class="fl req">お客様名</label>
+        <label class="fl req">縺雁ｮ｢讒伜錐</label>
         <div class="fi-row">
-          <input class="fi" id="f-cname" type="text" placeholder="例：田中 太郎 様">
-          <button class="mic" id="mic-cname" onclick="startVoice('f-cname','mic-cname')">🎤</button>
+          <input class="fi" id="f-cname" type="text" placeholder="萓具ｼ夂伐荳ｭ 螟ｪ驛・讒・>
+          <button class="mic" id="mic-cname" onclick="startVoice('f-cname','mic-cname')">痔</button>
         </div>
       </div>
       <div class="fg">
-        <label class="fl">ご住所</label>
+        <label class="fl">縺比ｽ乗園</label>
         <div class="fi-row">
-          <input class="fi" id="f-addr" type="text" placeholder="例：大阪府大阪市北区…">
-          <button class="mic" id="mic-addr" onclick="startVoice('f-addr','mic-addr')">🎤</button>
+          <input class="fi" id="f-addr" type="text" placeholder="萓具ｼ壼､ｧ髦ｪ蠎懷､ｧ髦ｪ蟶ょ圏蛹ｺ窶ｦ">
+          <button class="mic" id="mic-addr" onclick="startVoice('f-addr','mic-addr')">痔</button>
         </div>
       </div>
       <div class="fg">
-        <label class="fl">電話番号</label>
-        <input class="fi" id="f-phone" type="tel" placeholder="例：06-1234-5678">
+        <label class="fl">髮ｻ隧ｱ逡ｪ蜿ｷ</label>
+        <input class="fi" id="f-phone" type="tel" placeholder="萓具ｼ・6-1234-5678">
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ch">🐾 対象害鳥・害獣</div>
+    <div class="ch">誓 蟇ｾ雎｡螳ｳ魑･繝ｻ螳ｳ迯｣</div>
     <div class="cb">
       <div class="fg">
         <div class="chips" id="pest-chips">
-          <button class="chip" data-val="鳩" onclick="toggleChip(this,'pest')">🐦 鳩</button>
-          <button class="chip" data-val="ネズミ" onclick="toggleChip(this,'pest')">🐀 ネズミ</button>
-          <button class="chip" data-val="イタチ" onclick="toggleChip(this,'pest')">🦦 イタチ</button>
-          <button class="chip" data-val="ハクビシン" onclick="toggleChip(this,'pest')">🦝 ハクビシン</button>
-          <button class="chip" data-val="アライグマ" onclick="toggleChip(this,'pest')">🦝 アライグマ</button>
-          <button class="chip" data-val="カラス" onclick="toggleChip(this,'pest')">🐦 カラス</button>
-          <button class="chip" data-val="ゴキブリ" onclick="toggleChip(this,'pest')">🪳 ゴキブリ</button>
-          <button class="chip" data-val="ハチ" onclick="toggleChip(this,'pest')">🐝 ハチ</button>
-          <button class="chip" data-val="アリ" onclick="toggleChip(this,'pest')">🐜 アリ</button>
-          <button class="chip" data-val="その他" onclick="toggleChip(this,'pest')">その他</button>
+          <button class="chip" data-val="魑ｩ" onclick="toggleChip(this,'pest')">凄 魑ｩ</button>
+          <button class="chip" data-val="繝阪ぜ繝・ onclick="toggleChip(this,'pest')">逗 繝阪ぜ繝・/button>
+          <button class="chip" data-val="繧､繧ｿ繝・ onclick="toggleChip(this,'pest')">ｦｦ 繧､繧ｿ繝・/button>
+          <button class="chip" data-val="繝上け繝薙す繝ｳ" onclick="toggleChip(this,'pest')">ｦ・繝上け繝薙す繝ｳ</button>
+          <button class="chip" data-val="繧｢繝ｩ繧､繧ｰ繝・ onclick="toggleChip(this,'pest')">ｦ・繧｢繝ｩ繧､繧ｰ繝・/button>
+          <button class="chip" data-val="繧ｫ繝ｩ繧ｹ" onclick="toggleChip(this,'pest')">凄 繧ｫ繝ｩ繧ｹ</button>
+          <button class="chip" data-val="繧ｴ繧ｭ繝悶Μ" onclick="toggleChip(this,'pest')">ｪｳ 繧ｴ繧ｭ繝悶Μ</button>
+          <button class="chip" data-val="繝上メ" onclick="toggleChip(this,'pest')">雀 繝上メ</button>
+          <button class="chip" data-val="繧｢繝ｪ" onclick="toggleChip(this,'pest')">頗 繧｢繝ｪ</button>
+          <button class="chip" data-val="縺昴・莉・ onclick="toggleChip(this,'pest')">縺昴・莉・/button>
         </div>
       </div>
       <div class="fg" id="pest-other-row" style="display:none">
-        <label class="fl">その他（自由入力）</label>
+        <label class="fl">縺昴・莉厄ｼ郁・逕ｱ蜈･蜉幢ｼ・/label>
         <div class="fi-row">
-          <input class="fi" id="f-pest-other" type="text" placeholder="害獣・害虫名を入力">
-          <button class="mic" id="mic-pestother" onclick="startVoice('f-pest-other','mic-pestother')">🎤</button>
+          <input class="fi" id="f-pest-other" type="text" placeholder="螳ｳ迯｣繝ｻ螳ｳ陌ｫ蜷阪ｒ蜈･蜉・>
+          <button class="mic" id="mic-pestother" onclick="startVoice('f-pest-other','mic-pestother')">痔</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ch">🔧 作業内容</div>
+    <div class="ch">肌 菴懈･ｭ蜀・ｮｹ</div>
     <div class="cb">
       <div class="fg">
         <div class="chips" id="work-chips">
-          <button class="chip" data-val="調査・点検" onclick="toggleChip(this,'work')">🔍 調査・点検</button>
-          <button class="chip" data-val="薬剤散布" onclick="toggleChip(this,'work')">💊 薬剤散布</button>
-          <button class="chip" data-val="罠設置" onclick="toggleChip(this,'work')">🪤 罠設置</button>
-          <button class="chip" data-val="侵入口閉塞" onclick="toggleChip(this,'work')">🚫 侵入口閉塞</button>
-          <button class="chip" data-val="防鳥ネット設置" onclick="toggleChip(this,'work')">🕸️ 防鳥ネット設置</button>
-          <button class="chip" data-val="忌避剤設置" onclick="toggleChip(this,'work')">🧪 忌避剤設置</button>
-          <button class="chip" data-val="清掃" onclick="toggleChip(this,'work')">🧹 清掃</button>
-          <button class="chip" data-val="その他" onclick="toggleChip(this,'work')">その他</button>
+          <button class="chip" data-val="隱ｿ譟ｻ繝ｻ轤ｹ讀・ onclick="toggleChip(this,'work')">剥 隱ｿ譟ｻ繝ｻ轤ｹ讀・/button>
+          <button class="chip" data-val="阮ｬ蜑､謨｣蟶・ onclick="toggleChip(this,'work')">抽 阮ｬ蜑､謨｣蟶・/button>
+          <button class="chip" data-val="鄂險ｭ鄂ｮ" onclick="toggleChip(this,'work')">ｪ､ 鄂險ｭ鄂ｮ</button>
+          <button class="chip" data-val="萓ｵ蜈･蜿｣髢牙｡・ onclick="toggleChip(this,'work')">圻 萓ｵ蜈･蜿｣髢牙｡・/button>
+          <button class="chip" data-val="髦ｲ魑･繝阪ャ繝郁ｨｭ鄂ｮ" onclick="toggleChip(this,'work')">丙・・髦ｲ魑･繝阪ャ繝郁ｨｭ鄂ｮ</button>
+          <button class="chip" data-val="蠢碁∩蜑､險ｭ鄂ｮ" onclick="toggleChip(this,'work')">ｧｪ 蠢碁∩蜑､險ｭ鄂ｮ</button>
+          <button class="chip" data-val="貂・祉" onclick="toggleChip(this,'work')">ｧｹ 貂・祉</button>
+          <button class="chip" data-val="縺昴・莉・ onclick="toggleChip(this,'work')">縺昴・莉・/button>
         </div>
       </div>
       <div class="fg" id="work-other-row" style="display:none">
-        <label class="fl">その他（自由入力）</label>
+        <label class="fl">縺昴・莉厄ｼ郁・逕ｱ蜈･蜉幢ｼ・/label>
         <div class="fi-row">
-          <input class="fi" id="f-work-other" type="text" placeholder="作業内容を入力">
-          <button class="mic" id="mic-workother" onclick="startVoice('f-work-other','mic-workother')">🎤</button>
+          <input class="fi" id="f-work-other" type="text" placeholder="菴懈･ｭ蜀・ｮｹ繧貞・蜉・>
+          <button class="mic" id="mic-workother" onclick="startVoice('f-work-other','mic-workother')">痔</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ch">🛡️ 保証期間</div>
+    <div class="ch">孱・・菫晁ｨｼ譛滄俣</div>
     <div class="cb">
       <div class="fg">
-        <label class="fl">保証期間</label>
+        <label class="fl">菫晁ｨｼ譛滄俣</label>
         <select class="fs" id="f-warranty" onchange="updateWarrantyDisplay()">
-          <option value="なし">なし</option>
-          <option value="1ヶ月">1ヶ月</option>
-          <option value="3ヶ月">3ヶ月</option>
-          <option value="6ヶ月">6ヶ月</option>
-          <option value="1年">1年</option>
-          <option value="2年">2年</option>
+          <option value="縺ｪ縺・>縺ｪ縺・/option>
+          <option value="1繝ｶ譛・>1繝ｶ譛・/option>
+          <option value="3繝ｶ譛・>3繝ｶ譛・/option>
+          <option value="6繝ｶ譛・>6繝ｶ譛・/option>
+          <option value="1蟷ｴ">1蟷ｴ</option>
+          <option value="2蟷ｴ">2蟷ｴ</option>
         </select>
       </div>
       <div id="warranty-info" style="display:none;font-size:.9rem;color:var(--muted);padding:6px 0">
-        開始：<strong id="w-start"></strong>　→　終了：<strong id="w-end" style="color:var(--dgreen)"></strong>
+        髢句ｧ具ｼ・strong id="w-start"></strong>縲竊偵邨ゆｺ・ｼ・strong id="w-end" style="color:var(--dgreen)"></strong>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ch">📝 特記事項</div>
+    <div class="ch">統 迚ｹ險倅ｺ矩・/div>
     <div class="cb">
       <div class="fg" style="margin-bottom:0">
         <div class="fi-row" style="align-items:flex-start">
-          <textarea class="fta" id="f-notes" placeholder="特記事項があれば入力してください…" rows="4"></textarea>
-          <button class="mic" id="mic-notes" onclick="startVoice('f-notes','mic-notes',true)">🎤</button>
+          <textarea class="fta" id="f-notes" placeholder="迚ｹ險倅ｺ矩・′縺ゅｌ縺ｰ蜈･蜉帙＠縺ｦ縺上□縺輔＞窶ｦ" rows="4"></textarea>
+          <button class="mic" id="mic-notes" onclick="startVoice('f-notes','mic-notes',true)">痔</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="ch">✍️ お客様サイン</div>
+    <div class="ch">笨搾ｸ・縺雁ｮ｢讒倥し繧､繝ｳ</div>
     <div class="cb">
       <div id="sign-preview-wrap" style="display:none;margin-bottom:12px">
         <img id="sign-preview" style="max-width:200px;border:1px solid var(--border);border-radius:8px;padding:8px;display:block">
         <div id="sign-ts" style="font-size:.8rem;color:var(--muted);margin-top:4px"></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-a" onclick="openSign()">✍️ お客様にサインしてもらう</button>
-        <button class="btn btn-s btn-sm" id="clear-sign-btn" onclick="clearSign()" style="display:none">✕ サインを消去</button>
+        <button class="btn btn-a" onclick="openSign()">笨搾ｸ・縺雁ｮ｢讒倥↓繧ｵ繧､繝ｳ縺励※繧ゅｉ縺・/button>
+        <button class="btn btn-s btn-sm" id="clear-sign-btn" onclick="clearSign()" style="display:none">笨・繧ｵ繧､繝ｳ繧呈ｶ亥悉</button>
       </div>
     </div>
   </div>
 
   <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px">
-    <button class="btn btn-p btn-lg" style="flex:1" onclick="saveReport()">💾 保存する</button>
-    <button class="btn btn-s btn-lg" onclick="formBack()">キャンセル</button>
+    <button class="btn btn-p btn-lg" style="flex:1" onclick="saveReport()">沈 菫晏ｭ倥☆繧・/button>
+    <button class="btn btn-s btn-lg" onclick="formBack()">繧ｭ繝｣繝ｳ繧ｻ繝ｫ</button>
   </div>
 
 </div>
 </div>
 
-<!-- ════════════ SIGN ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 SIGN 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-sign" class="view">
 <div style="background:var(--dgreen);color:#fff;padding:16px;text-align:center;flex-shrink:0">
-  <div style="font-size:1.05rem;font-weight:700">✍️ お客様サイン欄</div>
+  <div style="font-size:1.05rem;font-weight:700">笨搾ｸ・縺雁ｮ｢讒倥し繧､繝ｳ谺・/div>
   <div style="font-size:.85rem;opacity:.85;margin-top:3px" id="sign-for-name"></div>
 </div>
 <div style="padding:12px 16px;text-align:center;color:var(--muted);font-size:.9rem;flex-shrink:0">
-  枠内にサインしてください
+  譫蜀・↓繧ｵ繧､繝ｳ縺励※縺上□縺輔＞
 </div>
 <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden">
   <canvas id="signature-pad" style="border:2px dashed var(--border);border-radius:12px;max-width:100%;max-height:100%"></canvas>
 </div>
 <div style="padding:14px 16px;display:flex;gap:10px;border-top:1px solid var(--border);flex-shrink:0">
-  <button class="btn btn-s" onclick="clearSignPad()">クリア</button>
-  <button class="btn btn-p" style="flex:1" onclick="confirmSign()">✅ サイン完了</button>
-  <button class="btn btn-s" onclick="cancelSign()">キャンセル</button>
+  <button class="btn btn-s" onclick="clearSignPad()">繧ｯ繝ｪ繧｢</button>
+  <button class="btn btn-p" style="flex:1" onclick="confirmSign()">笨・繧ｵ繧､繝ｳ螳御ｺ・/button>
+  <button class="btn btn-s" onclick="cancelSign()">繧ｭ繝｣繝ｳ繧ｻ繝ｫ</button>
 </div>
 </div>
 
-<!-- ════════════ CUSTOMER VIEW ════════════ -->
+<!-- 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 CUSTOMER VIEW 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武 -->
 <div id="view-customer" class="view">
 <div class="topbar">
-  <h1>📋 作業報告書</h1>
+  <h1>搭 菴懈･ｭ蝣ｱ蜻頑嶌</h1>
   <div class="tb-act">
-    <button class="btn btn-g btn-sm" onclick="printReport(currentReport)">🖨️ 印刷/PDF</button>
+    <button class="btn btn-g btn-sm" onclick="printReport(currentReport)">蜜・・蜊ｰ蛻ｷ/PDF</button>
   </div>
 </div>
 <div id="customer-body" class="body">
-  <div class="loading"><div class="spin"></div>読み込み中…</div>
+  <div class="loading"><div class="spin"></div>隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ窶ｦ</div>
 </div>
 </div>
 
@@ -522,9 +522,9 @@ create policy "anon_read" on reports for select
 <div id="toast"></div>
 
 <script>
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // STATE
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 let sb = null;
 let allReports = [];
 let currentReport = null;
@@ -534,17 +534,17 @@ let tempSign = null;   // { data, ts } while on form
 let activeRecog = null;
 let activeMicBtn = null;
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // BOOT
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 async function boot() {
   const params = new URLSearchParams(location.search);
   const token = params.get('token');
 
-  const url = localStorage.getItem('sb_url');
-  const key = localStorage.getItem('sb_key');
-
-  if (!url || !key) { showView('setup'); return; }
+  const url = 'https://baxnzuhuosgartnjjdaq.supabase.co';
+  const key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJheG56dWh1b3NnYXJ0bmpqZGFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzc0NjE2OTgsImV4cCI6MjA5MzAzNzY5OH0.UgXK4vh-pHYZUd1eSjFnJ0jZX4IFBzYgulsH009OwDY';
+  localStorage.setItem('sb_url', url);
+  localStorage.setItem('sb_key', key);
 
   sb = window.supabase.createClient(url, key);
 
@@ -559,7 +559,7 @@ async function boot() {
     showView('dashboard');
     return;
   }
-  // 自動ログイン
+  // 閾ｪ蜍輔Ο繧ｰ繧､繝ｳ
   const autoEmail = localStorage.getItem('auto_email');
   const autoPw = localStorage.getItem('auto_pw');
   if (autoEmail && autoPw) {
@@ -573,56 +573,56 @@ async function boot() {
   showView('login');
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // VIEWS
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function showView(name) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   window.scrollTo(0, 0);
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // SETUP
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function copySQL() {
   navigator.clipboard.writeText(document.getElementById('sql-text').textContent.trim())
-    .then(() => toast('SQLをコピーしました ✓'));
+    .then(() => toast('SQL繧偵さ繝斐・縺励∪縺励◆ 笨・));
 }
 
 function saveSetup() {
   const url = document.getElementById('setup-url').value.trim();
   const key = document.getElementById('setup-key').value.trim();
-  if (!url || !key) { toast('URLとキーを入力してください'); return; }
+  if (!url || !key) { toast('URL縺ｨ繧ｭ繝ｼ繧貞・蜉帙＠縺ｦ縺上□縺輔＞'); return; }
   localStorage.setItem('sb_url', url);
   localStorage.setItem('sb_key', key);
   sb = window.supabase.createClient(url, key);
   showView('login');
-  toast('設定を保存しました');
+  toast('險ｭ螳壹ｒ菫晏ｭ倥＠縺ｾ縺励◆');
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // AUTH
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 async function doLogin() {
   if (!sb) {
     const url = localStorage.getItem('sb_url');
     const key = localStorage.getItem('sb_key');
     if (url && key) sb = window.supabase.createClient(url, key);
-    else { toast('設定が見つかりません。設定を変更するを押してください。'); return; }
+    else { toast('險ｭ螳壹′隕九▽縺九ｊ縺ｾ縺帙ｓ縲りｨｭ螳壹ｒ螟画峩縺吶ｋ繧呈款縺励※縺上□縺輔＞縲・); return; }
   }
   const email = document.getElementById('l-email').value.trim();
   const pw = document.getElementById('l-pw').value;
   const btn = document.getElementById('l-btn');
   const err = document.getElementById('l-err');
-  if (!email || !pw) { err.textContent = 'メールとパスワードを入力してください'; err.style.display = 'block'; return; }
-  btn.textContent = 'ログイン中…'; btn.disabled = true; err.style.display = 'none';
+  if (!email || !pw) { err.textContent = '繝｡繝ｼ繝ｫ縺ｨ繝代せ繝ｯ繝ｼ繝峨ｒ蜈･蜉帙＠縺ｦ縺上□縺輔＞'; err.style.display = 'block'; return; }
+  btn.textContent = '繝ｭ繧ｰ繧､繝ｳ荳ｭ窶ｦ'; btn.disabled = true; err.style.display = 'none';
 
   try {
     const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
-    btn.textContent = 'ログイン'; btn.disabled = false;
+    btn.textContent = '繝ｭ繧ｰ繧､繝ｳ'; btn.disabled = false;
     if (error) {
-      err.textContent = 'エラー: ' + error.message;
+      err.textContent = '繧ｨ繝ｩ繝ｼ: ' + error.message;
       err.style.display = 'block';
       return;
     }
@@ -631,8 +631,8 @@ async function doLogin() {
     await loadDashboard();
     showView('dashboard');
   } catch (e) {
-    btn.textContent = 'ログイン'; btn.disabled = false;
-    err.textContent = 'エラー: ' + (e.message || '不明なエラー');
+    btn.textContent = '繝ｭ繧ｰ繧､繝ｳ'; btn.disabled = false;
+    err.textContent = '繧ｨ繝ｩ繝ｼ: ' + (e.message || '荳肴・縺ｪ繧ｨ繝ｩ繝ｼ');
     err.style.display = 'block';
   }
 }
@@ -644,15 +644,15 @@ async function doLogout() {
   showView('login');
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // DASHBOARD
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 async function loadDashboard() {
-  document.getElementById('rlist').innerHTML = '<div class="loading"><div class="spin"></div>読み込み中…</div>';
+  document.getElementById('rlist').innerHTML = '<div class="loading"><div class="spin"></div>隱ｭ縺ｿ霎ｼ縺ｿ荳ｭ窶ｦ</div>';
   const { data, error } = await sb.from('reports').select('*')
     .order('report_date', { ascending: false })
     .order('created_at', { ascending: false });
-  if (error) { document.getElementById('rlist').innerHTML = '<div class="empty"><div class="ei">⚠️</div><p>読み込みに失敗しました</p></div>'; return; }
+  if (error) { document.getElementById('rlist').innerHTML = '<div class="empty"><div class="ei">笞・・/div><p>隱ｭ縺ｿ霎ｼ縺ｿ縺ｫ螟ｱ謨励＠縺ｾ縺励◆</p></div>'; return; }
   allReports = data || [];
   renderList(allReports);
 }
@@ -660,19 +660,19 @@ async function loadDashboard() {
 function renderList(list) {
   const el = document.getElementById('rlist');
   if (!list.length) {
-    el.innerHTML = '<div class="empty"><div class="ei">📋</div><p>報告書がありません<br>右下の ＋ から作成してください</p></div>';
+    el.innerHTML = '<div class="empty"><div class="ei">搭</div><p>蝣ｱ蜻頑嶌縺後≠繧翫∪縺帙ｓ<br>蜿ｳ荳九・ ・・縺九ｉ菴懈・縺励※縺上□縺輔＞</p></div>';
     return;
   }
   el.innerHTML = list.map(r => {
-    const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
+    const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('繝ｻ') || '窶・;
     const signed = r.signature_data
-      ? '<span class="badge b-grn">✓ サイン済</span>'
-      : '<span class="badge b-gry">未サイン</span>';
-    const d = r.report_date ? r.report_date.replace(/-/g,'/') : '—';
+      ? '<span class="badge b-grn">笨・繧ｵ繧､繝ｳ貂・/span>'
+      : '<span class="badge b-gry">譛ｪ繧ｵ繧､繝ｳ</span>';
+    const d = r.report_date ? r.report_date.replace(/-/g,'/') : '窶・;
     return `<div class="ri" onclick="openDetail('${r.id}')">
-      <div style="font-size:1.4rem">📋</div>
+      <div style="font-size:1.4rem">搭</div>
       <div class="ri-main">
-        <div class="ri-name">${esc(r.customer_name||'（名前なし）')} ${signed}</div>
+        <div class="ri-name">${esc(r.customer_name||'・亥錐蜑阪↑縺暦ｼ・)} ${signed}</div>
         <div class="ri-sub">${esc(pests)}</div>
       </div>
       <div class="ri-date">${d}<br><span style="font-size:.72rem">${esc(r.technician_name||'')}</span></div>
@@ -690,43 +690,43 @@ function filterReports() {
   }));
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // DETAIL
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function openDetail(id) {
   const r = allReports.find(x => x.id === id);
   if (!r) return;
   currentReport = r;
   editingId = id;
 
-  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
-  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('・') || '—';
+  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('繝ｻ') || '窶・;
+  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('繝ｻ') || '窶・;
   const dateStr = fmtDate(r.report_date);
-  const wLine = r.warranty_period === 'なし'
-    ? 'なし'
-    : `${r.warranty_period}（${fmtDate(r.warranty_start)} ～ ${fmtDate(r.warranty_end)}）`;
+  const wLine = r.warranty_period === '縺ｪ縺・
+    ? '縺ｪ縺・
+    : `${r.warranty_period}・・{fmtDate(r.warranty_start)} ・・${fmtDate(r.warranty_end)}・荏;
   const signed = r.signature_data
-    ? '<span class="badge b-grn">✓ サイン済</span>'
-    : '<span class="badge b-amb">未サイン</span>';
+    ? '<span class="badge b-grn">笨・繧ｵ繧､繝ｳ貂・/span>'
+    : '<span class="badge b-amb">譛ｪ繧ｵ繧､繝ｳ</span>';
   const shareUrl = `${location.origin}${location.pathname}?token=${r.share_token}`;
 
   document.getElementById('detail-body').innerHTML = `
     <div class="card">
       <div class="ch" style="justify-content:space-between">
-        <span>${esc(r.customer_name||'（名前なし）')}</span>${signed}
+        <span>${esc(r.customer_name||'・亥錐蜑阪↑縺暦ｼ・)}</span>${signed}
       </div>
       <div class="cb">
-        ${drow('作業日', dateStr)}
-        ${drow('担当者', r.technician_name||'—')}
-        ${drow('お客様名', r.customer_name||'—')}
-        ${drow('ご住所', r.customer_address||'—')}
-        ${r.customer_phone ? drow('電話番号', r.customer_phone) : ''}
-        ${drow('対象害鳥・害獣', pests)}
-        ${drow('作業内容', works)}
-        ${drow('保証期間', wLine)}
-        ${r.notes ? drow('特記事項', esc(r.notes).replace(/\n/g,'<br>')) : ''}
+        ${drow('菴懈･ｭ譌･', dateStr)}
+        ${drow('諡・ｽ楢・, r.technician_name||'窶・)}
+        ${drow('縺雁ｮ｢讒伜錐', r.customer_name||'窶・)}
+        ${drow('縺比ｽ乗園', r.customer_address||'窶・)}
+        ${r.customer_phone ? drow('髮ｻ隧ｱ逡ｪ蜿ｷ', r.customer_phone) : ''}
+        ${drow('蟇ｾ雎｡螳ｳ魑･繝ｻ螳ｳ迯｣', pests)}
+        ${drow('菴懈･ｭ蜀・ｮｹ', works)}
+        ${drow('菫晁ｨｼ譛滄俣', wLine)}
+        ${r.notes ? drow('迚ｹ險倅ｺ矩・, esc(r.notes).replace(/\n/g,'<br>')) : ''}
         ${r.signature_data ? `<div style="margin-top:12px">
-          <div style="font-size:.8rem;color:var(--muted);margin-bottom:6px">お客様サイン</div>
+          <div style="font-size:.8rem;color:var(--muted);margin-bottom:6px">縺雁ｮ｢讒倥し繧､繝ｳ</div>
           <img src="${r.signature_data}" style="max-width:180px;border:1px solid var(--border);border-radius:8px;padding:8px">
           ${r.signed_at ? `<div style="font-size:.78rem;color:var(--muted);margin-top:4px">${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
         </div>` : ''}
@@ -734,17 +734,17 @@ function openDetail(id) {
     </div>
 
     <div class="card">
-      <div class="ch">📤 共有・出力</div>
+      <div class="ch">豆 蜈ｱ譛峨・蜃ｺ蜉・/div>
       <div class="cb" style="display:flex;flex-direction:column;gap:10px">
-        <button class="btn btn-p btn-blk" onclick="printReport(allReports.find(x=>x.id==='${r.id}'))">🖨️ 印刷 / PDF保存</button>
-        <button class="btn btn-s btn-blk" onclick="copyLink('${shareUrl}')">🔗 共有リンクをコピー</button>
-        <a class="btn btn-s btn-blk" href="mailto:?subject=${encodeURIComponent('作業報告書（'+r.customer_name+'様）')}&body=${encodeURIComponent('三和テックの作業報告書はこちらからご確認いただけます。\n\n'+shareUrl)}">✉️ メールで送る</a>
+        <button class="btn btn-p btn-blk" onclick="printReport(allReports.find(x=>x.id==='${r.id}'))">蜜・・蜊ｰ蛻ｷ / PDF菫晏ｭ・/button>
+        <button class="btn btn-s btn-blk" onclick="copyLink('${shareUrl}')">迫 蜈ｱ譛峨Μ繝ｳ繧ｯ繧偵さ繝斐・</button>
+        <a class="btn btn-s btn-blk" href="mailto:?subject=${encodeURIComponent('菴懈･ｭ蝣ｱ蜻頑嶌・・+r.customer_name+'讒假ｼ・)}&body=${encodeURIComponent('荳牙柱繝・ャ繧ｯ縺ｮ菴懈･ｭ蝣ｱ蜻頑嶌縺ｯ縺薙■繧峨°繧峨＃遒ｺ隱阪＞縺溘□縺代∪縺吶・n\n'+shareUrl)}">笨会ｸ・繝｡繝ｼ繝ｫ縺ｧ騾√ｋ</a>
       </div>
     </div>
 
     <div style="display:flex;gap:10px;margin-bottom:32px">
-      <button class="btn btn-s" style="flex:1" onclick="openEditForm()">✏️ 編集する</button>
-      <button class="btn btn-r btn-sm" onclick="confirmDelete('${r.id}')">🗑️ 削除</button>
+      <button class="btn btn-s" style="flex:1" onclick="openEditForm()">笨擾ｸ・邱ｨ髮・☆繧・/button>
+      <button class="btn btn-r btn-sm" onclick="confirmDelete('${r.id}')">卵・・蜑企勁</button>
     </div>
   `;
   showView('detail');
@@ -754,14 +754,14 @@ function drow(label, val) {
   return `<div class="drow"><span class="dlbl">${label}</span><span class="dval">${val}</span></div>`;
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // FORM
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function openNewForm() {
   editingId = null;
   currentReport = null;
   tempSign = null;
-  document.getElementById('form-title').textContent = '新規報告書';
+  document.getElementById('form-title').textContent = '譁ｰ隕丞ｱ蜻頑嶌';
   resetForm();
   showView('form');
 }
@@ -769,7 +769,7 @@ function openNewForm() {
 function openEditForm() {
   const r = currentReport;
   if (!r) return;
-  document.getElementById('form-title').textContent = '報告書を編集';
+  document.getElementById('form-title').textContent = '蝣ｱ蜻頑嶌繧堤ｷｨ髮・;
 
   document.getElementById('f-date').value = r.report_date || '';
   document.getElementById('f-tech').value = r.technician_name || '';
@@ -779,7 +779,7 @@ function openEditForm() {
   document.getElementById('f-pest-other').value = r.pest_other || '';
   document.getElementById('f-work-other').value = r.work_other || '';
   document.getElementById('f-notes').value = r.notes || '';
-  document.getElementById('f-warranty').value = r.warranty_period || 'なし';
+  document.getElementById('f-warranty').value = r.warranty_period || '縺ｪ縺・;
 
   document.querySelectorAll('#pest-chips .chip').forEach(c =>
     c.classList.toggle('on', (r.pest_types||[]).includes(c.dataset.val)));
@@ -787,9 +787,9 @@ function openEditForm() {
     c.classList.toggle('on', (r.work_types||[]).includes(c.dataset.val)));
 
   document.getElementById('pest-other-row').style.display =
-    (r.pest_types||[]).includes('その他') ? 'block' : 'none';
+    (r.pest_types||[]).includes('縺昴・莉・) ? 'block' : 'none';
   document.getElementById('work-other-row').style.display =
-    (r.work_types||[]).includes('その他') ? 'block' : 'none';
+    (r.work_types||[]).includes('縺昴・莉・) ? 'block' : 'none';
 
   if (r.signature_data) {
     tempSign = { data: r.signature_data, ts: r.signed_at };
@@ -797,7 +797,7 @@ function openEditForm() {
     document.getElementById('sign-preview-wrap').style.display = 'block';
     document.getElementById('clear-sign-btn').style.display = 'inline-flex';
     document.getElementById('sign-ts').textContent = r.signed_at
-      ? 'サイン日時: ' + new Date(r.signed_at).toLocaleString('ja-JP') : '';
+      ? '繧ｵ繧､繝ｳ譌･譎・ ' + new Date(r.signed_at).toLocaleString('ja-JP') : '';
   } else {
     tempSign = null;
     document.getElementById('sign-preview-wrap').style.display = 'none';
@@ -818,7 +818,7 @@ function resetForm() {
   document.getElementById('f-pest-other').value = '';
   document.getElementById('f-work-other').value = '';
   document.getElementById('f-notes').value = '';
-  document.getElementById('f-warranty').value = 'なし';
+  document.getElementById('f-warranty').value = '縺ｪ縺・;
   document.querySelectorAll('#pest-chips .chip, #work-chips .chip').forEach(c => c.classList.remove('on'));
   document.getElementById('pest-other-row').style.display = 'none';
   document.getElementById('work-other-row').style.display = 'none';
@@ -832,12 +832,12 @@ function formBack() {
   if (editingId) { showView('detail'); } else { showView('dashboard'); }
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // CHIPS
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function toggleChip(el, group) {
   el.classList.toggle('on');
-  const hasOther = !!document.querySelector(`#${group}-chips .chip.on[data-val="その他"]`);
+  const hasOther = !!document.querySelector(`#${group}-chips .chip.on[data-val="縺昴・莉・]`);
   document.getElementById(`${group}-other-row`).style.display = hasOther ? 'block' : 'none';
 }
 
@@ -845,13 +845,13 @@ function getChips(containerId) {
   return [...document.querySelectorAll(`#${containerId} .chip.on`)].map(c => c.dataset.val);
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // WARRANTY
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function updateWarrantyDisplay() {
   const val = document.getElementById('f-warranty').value;
   const info = document.getElementById('warranty-info');
-  if (val === 'なし') { info.style.display = 'none'; return; }
+  if (val === '縺ｪ縺・) { info.style.display = 'none'; return; }
   const startStr = document.getElementById('f-date').value;
   if (!startStr) { info.style.display = 'none'; return; }
   const endStr = calcWarrantyEnd(startStr, val);
@@ -861,22 +861,22 @@ function updateWarrantyDisplay() {
 }
 
 function calcWarrantyEnd(startStr, val) {
-  if (val === 'なし' || !startStr) return null;
+  if (val === '縺ｪ縺・ || !startStr) return null;
   const d = new Date(startStr);
-  if (val === '1ヶ月') d.setMonth(d.getMonth() + 1);
-  else if (val === '3ヶ月') d.setMonth(d.getMonth() + 3);
-  else if (val === '6ヶ月') d.setMonth(d.getMonth() + 6);
-  else if (val === '1年') d.setFullYear(d.getFullYear() + 1);
-  else if (val === '2年') d.setFullYear(d.getFullYear() + 2);
+  if (val === '1繝ｶ譛・) d.setMonth(d.getMonth() + 1);
+  else if (val === '3繝ｶ譛・) d.setMonth(d.getMonth() + 3);
+  else if (val === '6繝ｶ譛・) d.setMonth(d.getMonth() + 6);
+  else if (val === '1蟷ｴ') d.setFullYear(d.getFullYear() + 1);
+  else if (val === '2蟷ｴ') d.setFullYear(d.getFullYear() + 2);
   return d.toISOString().split('T')[0];
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // SIGNATURE
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function openSign() {
-  const cname = document.getElementById('f-cname').value || 'お客様';
-  document.getElementById('sign-for-name').textContent = cname + ' 様';
+  const cname = document.getElementById('f-cname').value || '縺雁ｮ｢讒・;
+  document.getElementById('sign-for-name').textContent = cname + ' 讒・;
   showView('sign');
   requestAnimationFrame(() => {
     const canvas = document.getElementById('signature-pad');
@@ -893,14 +893,14 @@ function openSign() {
 function clearSignPad() { if (signPad) signPad.clear(); }
 
 function confirmSign() {
-  if (!signPad || signPad.isEmpty()) { toast('サインしてください'); return; }
+  if (!signPad || signPad.isEmpty()) { toast('繧ｵ繧､繝ｳ縺励※縺上□縺輔＞'); return; }
   tempSign = { data: signPad.toDataURL('image/png'), ts: new Date().toISOString() };
   document.getElementById('sign-preview').src = tempSign.data;
   document.getElementById('sign-preview-wrap').style.display = 'block';
   document.getElementById('clear-sign-btn').style.display = 'inline-flex';
-  document.getElementById('sign-ts').textContent = 'サイン日時: ' + new Date(tempSign.ts).toLocaleString('ja-JP');
+  document.getElementById('sign-ts').textContent = '繧ｵ繧､繝ｳ譌･譎・ ' + new Date(tempSign.ts).toLocaleString('ja-JP');
   showView('form');
-  toast('サインを保存しました ✓');
+  toast('繧ｵ繧､繝ｳ繧剃ｿ晏ｭ倥＠縺ｾ縺励◆ 笨・);
 }
 
 function cancelSign() { showView('form'); }
@@ -911,14 +911,14 @@ function clearSign() {
   document.getElementById('clear-sign-btn').style.display = 'none';
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // SAVE / DELETE
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 async function saveReport() {
   const date = document.getElementById('f-date').value;
   const cname = document.getElementById('f-cname').value.trim();
-  if (!date) { toast('作業日を入力してください'); return; }
-  if (!cname) { toast('お客様名を入力してください'); return; }
+  if (!date) { toast('菴懈･ｭ譌･繧貞・蜉帙＠縺ｦ縺上□縺輔＞'); return; }
+  if (!cname) { toast('縺雁ｮ｢讒伜錐繧貞・蜉帙＠縺ｦ縺上□縺輔＞'); return; }
 
   const tech = document.getElementById('f-tech').value.trim();
   const warranty = document.getElementById('f-warranty').value;
@@ -935,7 +935,7 @@ async function saveReport() {
     work_types: getChips('work-chips'),
     work_other: document.getElementById('f-work-other').value.trim(),
     warranty_period: warranty,
-    warranty_start: warranty !== 'なし' ? date : null,
+    warranty_start: warranty !== '縺ｪ縺・ ? date : null,
     warranty_end: warrantyEnd,
     notes: document.getElementById('f-notes').value.trim(),
     signature_data: tempSign ? tempSign.data : null,
@@ -951,34 +951,34 @@ async function saveReport() {
     ({ error } = await sb.from('reports').insert(payload));
   }
 
-  if (error) { toast('保存に失敗しました: ' + error.message); return; }
-  toast('保存しました ✓');
+  if (error) { toast('菫晏ｭ倥↓螟ｱ謨励＠縺ｾ縺励◆: ' + error.message); return; }
+  toast('菫晏ｭ倥＠縺ｾ縺励◆ 笨・);
   await loadDashboard();
   showView('dashboard');
 }
 
 function confirmDelete(id) {
-  showModal('削除の確認', 'この報告書を削除しますか？\n元に戻すことはできません。', [
-    { label: '削除する', cls: 'btn-r', fn: async () => {
+  showModal('蜑企勁縺ｮ遒ｺ隱・, '縺薙・蝣ｱ蜻頑嶌繧貞炎髯､縺励∪縺吶°・歃n蜈・↓謌ｻ縺吶％縺ｨ縺ｯ縺ｧ縺阪∪縺帙ｓ縲・, [
+    { label: '蜑企勁縺吶ｋ', cls: 'btn-r', fn: async () => {
       hideModal();
       const { error } = await sb.from('reports').delete().eq('id', id);
-      if (error) { toast('削除に失敗しました'); return; }
-      toast('削除しました');
+      if (error) { toast('蜑企勁縺ｫ螟ｱ謨励＠縺ｾ縺励◆'); return; }
+      toast('蜑企勁縺励∪縺励◆');
       await loadDashboard();
       showView('dashboard');
     }},
-    { label: 'キャンセル', cls: 'btn-s', fn: hideModal }
+    { label: '繧ｭ繝｣繝ｳ繧ｻ繝ｫ', cls: 'btn-s', fn: hideModal }
   ]);
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // CUSTOMER VIEW
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 async function loadCustomerView(token) {
   showView('customer');
   const { data, error } = await sb.from('reports').select('*').eq('share_token', token).single();
   if (error || !data) {
-    document.getElementById('customer-body').innerHTML = '<div class="empty"><div class="ei">❌</div><p>報告書が見つかりませんでした</p></div>';
+    document.getElementById('customer-body').innerHTML = '<div class="empty"><div class="ei">笶・/div><p>蝣ｱ蜻頑嶌縺瑚ｦ九▽縺九ｊ縺ｾ縺帙ｓ縺ｧ縺励◆</p></div>';
     return;
   }
   currentReport = data;
@@ -986,70 +986,70 @@ async function loadCustomerView(token) {
 }
 
 function renderCustomerBody(r) {
-  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
-  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('・') || '—';
-  const wLine = r.warranty_period === 'なし'
-    ? 'なし'
-    : `${r.warranty_period}（${fmtDate(r.warranty_start)} ～ ${fmtDate(r.warranty_end)}）`;
+  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('繝ｻ') || '窶・;
+  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('繝ｻ') || '窶・;
+  const wLine = r.warranty_period === '縺ｪ縺・
+    ? '縺ｪ縺・
+    : `${r.warranty_period}・・{fmtDate(r.warranty_start)} ・・${fmtDate(r.warranty_end)}・荏;
 
   document.getElementById('customer-body').innerHTML = `
     <div style="text-align:center;margin-bottom:20px;padding:20px;background:#fff;border-radius:var(--r);box-shadow:var(--sh)">
-      <div style="font-size:1.3rem;font-weight:700;color:var(--dgreen)">三和テック株式会社</div>
-      <div style="color:var(--muted);margin-top:4px">作業報告書</div>
-      <div style="font-size:.85rem;color:var(--muted);margin-top:8px">作業日：${fmtDate(r.report_date)}</div>
+      <div style="font-size:1.3rem;font-weight:700;color:var(--dgreen)">荳牙柱繝・ャ繧ｯ譬ｪ蠑丈ｼ夂､ｾ</div>
+      <div style="color:var(--muted);margin-top:4px">菴懈･ｭ蝣ｱ蜻頑嶌</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-top:8px">菴懈･ｭ譌･・・{fmtDate(r.report_date)}</div>
     </div>
     <div class="card">
-      <div class="ch">👤 お客様情報</div>
+      <div class="ch">側 縺雁ｮ｢讒俶ュ蝣ｱ</div>
       <div class="cb">
-        ${drow('お名前', esc(r.customer_name||'—'))}
-        ${drow('ご住所', esc(r.customer_address||'—'))}
-        ${r.customer_phone ? drow('電話番号', esc(r.customer_phone)) : ''}
+        ${drow('縺雁錐蜑・, esc(r.customer_name||'窶・))}
+        ${drow('縺比ｽ乗園', esc(r.customer_address||'窶・))}
+        ${r.customer_phone ? drow('髮ｻ隧ｱ逡ｪ蜿ｷ', esc(r.customer_phone)) : ''}
       </div>
     </div>
     <div class="card">
-      <div class="ch">🔧 作業内容</div>
+      <div class="ch">肌 菴懈･ｭ蜀・ｮｹ</div>
       <div class="cb">
-        ${drow('対象害鳥・害獣', esc(pests))}
-        ${drow('作業種別', esc(works))}
-        ${r.notes ? drow('特記事項', esc(r.notes).replace(/\n/g,'<br>')) : ''}
+        ${drow('蟇ｾ雎｡螳ｳ魑･繝ｻ螳ｳ迯｣', esc(pests))}
+        ${drow('菴懈･ｭ遞ｮ蛻･', esc(works))}
+        ${r.notes ? drow('迚ｹ險倅ｺ矩・, esc(r.notes).replace(/\n/g,'<br>')) : ''}
       </div>
     </div>
     <div class="card">
-      <div class="ch">🛡️ 保証</div>
+      <div class="ch">孱・・菫晁ｨｼ</div>
       <div class="cb">
-        ${drow('保証期間', wLine)}
-        ${drow('担当者', esc(r.technician_name||'—'))}
+        ${drow('菫晁ｨｼ譛滄俣', wLine)}
+        ${drow('諡・ｽ楢・, esc(r.technician_name||'窶・))}
       </div>
     </div>
     ${r.signature_data ? `
     <div class="card">
-      <div class="ch">✍️ お客様サイン</div>
+      <div class="ch">笨搾ｸ・縺雁ｮ｢讒倥し繧､繝ｳ</div>
       <div class="cb">
         <img src="${r.signature_data}" style="max-width:200px;border:1px solid var(--border);border-radius:8px;padding:8px;display:block">
-        ${r.signed_at ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px">確認日時: ${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
+        ${r.signed_at ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px">遒ｺ隱肴律譎・ ${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
       </div>
     </div>` : ''}
-    <button class="btn btn-p btn-lg btn-blk" onclick="printReport(currentReport)" style="margin-bottom:32px">🖨️ 印刷 / PDFで保存</button>
+    <button class="btn btn-p btn-lg btn-blk" onclick="printReport(currentReport)" style="margin-bottom:32px">蜜・・蜊ｰ蛻ｷ / PDF縺ｧ菫晏ｭ・/button>
   `;
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // PRINT / PDF
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function printReport(r) {
   if (!r) return;
-  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
-  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('・') || '—';
-  const wLine = r.warranty_period === 'なし'
-    ? 'なし'
-    : `${r.warranty_period}（${fmtDate(r.warranty_start)} ～ ${fmtDate(r.warranty_end)}）`;
+  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('繝ｻ') || '窶・;
+  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('繝ｻ') || '窶・;
+  const wLine = r.warranty_period === '縺ｪ縺・
+    ? '縺ｪ縺・
+    : `${r.warranty_period}・・{fmtDate(r.warranty_start)} ・・${fmtDate(r.warranty_end)}・荏;
   const signBlock = r.signature_data
     ? `<img src="${r.signature_data}" style="max-width:150px;border:1px solid #ccc;padding:4px;border-radius:4px;display:block;margin-top:4px">`
     : `<div style="height:60px;border:1px solid #ccc;width:150px;border-radius:4px;margin-top:4px"></div>`;
 
   const w = window.open('', '_blank');
   w.document.write(`<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
-<title>作業報告書 - ${r.customer_name||''}</title>
+<title>菴懈･ｭ蝣ｱ蜻頑嶌 - ${r.customer_name||''}</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Meiryo','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;padding:18mm 20mm;color:#111;font-size:10.5pt;line-height:1.5}
@@ -1071,55 +1071,55 @@ th{background:#f0f5f0;font-weight:700;width:32%;color:#166534}
 @media print{.no-print{display:none}body{padding:15mm}}
 </style></head><body>
 <div class="no-print">
-  <button class="prt" onclick="window.print()">🖨️ 印刷 / PDF保存</button>
-  <button class="cls" onclick="window.close()">閉じる</button>
+  <button class="prt" onclick="window.print()">蜜・・蜊ｰ蛻ｷ / PDF菫晏ｭ・/button>
+  <button class="cls" onclick="window.close()">髢峨§繧・/button>
 </div>
-<h1>作　業　報　告　書</h1>
-<div class="company">三和テック株式会社　｜　作業日：${fmtDate(r.report_date)}</div>
+<h1>菴懊讌ｭ縲蝣ｱ縲蜻翫譖ｸ</h1>
+<div class="company">荳牙柱繝・ャ繧ｯ譬ｪ蠑丈ｼ夂､ｾ縲・懊菴懈･ｭ譌･・・{fmtDate(r.report_date)}</div>
 <div class="sec">
-  <div class="sec-title">【お客様情報】</div>
+  <div class="sec-title">縲舌♀螳｢讒俶ュ蝣ｱ縲・/div>
   <table>
-    <tr><th>お客様名</th><td>${esc(r.customer_name||'—')}</td></tr>
-    <tr><th>ご住所</th><td>${esc(r.customer_address||'—')}</td></tr>
-    <tr><th>電話番号</th><td>${esc(r.customer_phone||'—')}</td></tr>
+    <tr><th>縺雁ｮ｢讒伜錐</th><td>${esc(r.customer_name||'窶・)}</td></tr>
+    <tr><th>縺比ｽ乗園</th><td>${esc(r.customer_address||'窶・)}</td></tr>
+    <tr><th>髮ｻ隧ｱ逡ｪ蜿ｷ</th><td>${esc(r.customer_phone||'窶・)}</td></tr>
   </table>
 </div>
 <div class="sec">
-  <div class="sec-title">【作業内容】</div>
+  <div class="sec-title">縲蝉ｽ懈･ｭ蜀・ｮｹ縲・/div>
   <table>
-    <tr><th>対象害鳥・害獣</th><td>${esc(pests)}</td></tr>
-    <tr><th>作業種別</th><td>${esc(works)}</td></tr>
-    ${r.notes ? `<tr><th>特記事項</th><td>${esc(r.notes).replace(/\n/g,'<br>')}</td></tr>` : ''}
+    <tr><th>蟇ｾ雎｡螳ｳ魑･繝ｻ螳ｳ迯｣</th><td>${esc(pests)}</td></tr>
+    <tr><th>菴懈･ｭ遞ｮ蛻･</th><td>${esc(works)}</td></tr>
+    ${r.notes ? `<tr><th>迚ｹ險倅ｺ矩・/th><td>${esc(r.notes).replace(/\n/g,'<br>')}</td></tr>` : ''}
   </table>
 </div>
 <div class="sec">
-  <div class="sec-title">【保証】</div>
+  <div class="sec-title">縲蝉ｿ晁ｨｼ縲・/div>
   <table>
-    <tr><th>保証期間</th><td>${wLine}</td></tr>
+    <tr><th>菫晁ｨｼ譛滄俣</th><td>${wLine}</td></tr>
   </table>
 </div>
 <div class="bottom">
   <div class="sign-box">
-    <div class="sign-label">お客様確認サイン</div>
+    <div class="sign-label">縺雁ｮ｢讒倡｢ｺ隱阪し繧､繝ｳ</div>
     ${signBlock}
     ${r.signed_at ? `<div style="font-size:7.5pt;color:#999;margin-top:2mm">${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
   </div>
   <div style="text-align:right;font-size:9.5pt">
-    <div>担当者：<strong>${esc(r.technician_name||'—')}</strong></div>
-    <div style="font-size:8.5pt;color:#666;margin-top:2mm">三和テック株式会社</div>
+    <div>諡・ｽ楢・ｼ・strong>${esc(r.technician_name||'窶・)}</strong></div>
+    <div style="font-size:8.5pt;color:#666;margin-top:2mm">荳牙柱繝・ャ繧ｯ譬ｪ蠑丈ｼ夂､ｾ</div>
   </div>
 </div>
-<div class="footer">この報告書は三和テック株式会社が発行したものです</div>
+<div class="footer">縺薙・蝣ｱ蜻頑嶌縺ｯ荳牙柱繝・ャ繧ｯ譬ｪ蠑丈ｼ夂､ｾ縺檎匱陦後＠縺溘ｂ縺ｮ縺ｧ縺・/div>
 </body></html>`);
   w.document.close();
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // VOICE INPUT
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function startVoice(fieldId, micId, append = false) {
   if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-    toast('音声入力はChromeブラウザのみ対応しています');
+    toast('髻ｳ螢ｰ蜈･蜉帙・Chrome繝悶Λ繧ｦ繧ｶ縺ｮ縺ｿ蟇ｾ蠢懊＠縺ｦ縺・∪縺・);
     return;
   }
   const micBtn = document.getElementById(micId);
@@ -1136,9 +1136,9 @@ function startVoice(fieldId, micId, append = false) {
   r.interimResults = false;
 
   r.onstart = () => {
-    micBtn.classList.add('on'); micBtn.textContent = '⏹️';
+    micBtn.classList.add('on'); micBtn.textContent = '竢ｹ・・;
     activeMicBtn = micBtn; activeRecog = r;
-    toast('🎤 話してください…');
+    toast('痔 隧ｱ縺励※縺上□縺輔＞窶ｦ');
   };
   r.onresult = (e) => {
     const text = e.results[0][0].transcript;
@@ -1146,32 +1146,32 @@ function startVoice(fieldId, micId, append = false) {
     field.value = (append && field.value) ? field.value + '\n' + text : text;
   };
   r.onend = () => {
-    micBtn.classList.remove('on'); micBtn.textContent = '🎤';
+    micBtn.classList.remove('on'); micBtn.textContent = '痔';
     activeMicBtn = null; activeRecog = null;
   };
   r.onerror = () => {
-    micBtn.classList.remove('on'); micBtn.textContent = '🎤';
+    micBtn.classList.remove('on'); micBtn.textContent = '痔';
     activeMicBtn = null; activeRecog = null;
-    toast('音声認識に失敗しました');
+    toast('髻ｳ螢ｰ隱崎ｭ倥↓螟ｱ謨励＠縺ｾ縺励◆');
   };
   r.start();
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // SHARE
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 async function copyLink(url) {
   try {
     await navigator.clipboard.writeText(url);
-    toast('リンクをコピーしました ✓');
+    toast('繝ｪ繝ｳ繧ｯ繧偵さ繝斐・縺励∪縺励◆ 笨・);
   } catch {
-    prompt('以下のリンクをコピーしてください:', url);
+    prompt('莉･荳九・繝ｪ繝ｳ繧ｯ繧偵さ繝斐・縺励※縺上□縺輔＞:', url);
   }
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // MODAL
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function showModal(title, body, actions) {
   document.getElementById('m-title').textContent = title;
   document.getElementById('m-body').textContent = body;
@@ -1188,9 +1188,9 @@ function showModal(title, body, actions) {
 }
 function hideModal() { document.getElementById('modal').classList.remove('active'); }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // UTILS
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 function toast(msg, ms = 2500) {
   const t = document.getElementById('toast');
   t.textContent = msg; t.classList.add('show');
@@ -1199,7 +1199,7 @@ function toast(msg, ms = 2500) {
 }
 
 function fmtDate(d) {
-  if (!d) return '—';
+  if (!d) return '窶・;
   try { return new Date(d + 'T00:00:00').toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric' }); }
   catch { return d; }
 }
@@ -1208,9 +1208,9 @@ function esc(s) {
   return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 // START
-// ══════════════════════════════════════
+// 笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武笊絶武
 boot();
 </script>
 </body>
