@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>作業報告書｜三和テック</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#16a34a;--dgreen:#166534;--pgreen:#dcfce7;
+  --amber:#f59e0b;--red:#dc2626;
+  --bg:#f0f4f8;--white:#fff;--border:#e2e8f0;
+  --text:#1e293b;--muted:#64748b;
+  --r:12px;--sh:0 2px 12px rgba(0,0,0,.08)
+}
+body{font-family:'Meiryo','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* Views */
+.view{display:none;min-height:100vh}
+.view.active{display:block}
+#view-sign.active{display:flex;flex-direction:column}
+
+/* Topbar */
+.topbar{
+  background:linear-gradient(135deg,var(--dgreen),var(--green));
+  color:#fff;height:56px;padding:0 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.2)
+}
+.topbar h1{font-size:1rem;font-weight:700}
+.tb-act{display:flex;gap:8px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  padding:10px 18px;border-radius:8px;border:none;
+  font-size:.9rem;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:all .15s;text-decoration:none;line-height:1
+}
+.btn-p{background:var(--green);color:#fff}
+.btn-p:hover{background:var(--dgreen)}
+.btn-s{background:#fff;color:var(--text);border:1.5px solid var(--border)}
+.btn-s:hover{background:var(--bg)}
+.btn-a{background:var(--amber);color:#fff}
+.btn-a:hover{background:#d97706}
+.btn-r{background:var(--red);color:#fff}
+.btn-r:hover{background:#b91c1c}
+.btn-g{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.btn-g:hover{background:rgba(255,255,255,.25)}
+.btn-lg{padding:14px 24px;font-size:1rem;border-radius:10px}
+.btn-sm{padding:6px 12px;font-size:.8rem}
+.btn-blk{width:100%}
+
+/* Layout */
+.body{padding:16px;max-width:680px;margin:0 auto}
+
+/* Card */
+.card{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:14px}
+.ch{padding:13px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:.95rem;display:flex;align-items:center;gap:7px}
+.cb{padding:16px}
+
+/* Form */
+.fg{margin-bottom:16px}
+.fg:last-child{margin-bottom:0}
+.fl{display:block;font-size:.78rem;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.fl.req::after{content:' *';color:var(--red)}
+.fi,.fs,.fta{
+  width:100%;padding:11px 13px;
+  border:1.5px solid var(--border);border-radius:8px;
+  font-size:1rem;font-family:inherit;color:var(--text);background:#fff;
+  transition:border-color .15s
+}
+.fi:focus,.fs:focus,.fta:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,.12)}
+.fta{resize:vertical;min-height:80px}
+.fi-row{display:flex;gap:8px;align-items:flex-start}
+.fi-row .fi,.fi-row .fta{flex:1}
+
+/* Mic button */
+.mic{
+  flex-shrink:0;width:44px;height:44px;border-radius:50%;
+  border:none;background:var(--pgreen);color:var(--dgreen);
+  font-size:1.2rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .15s
+}
+.mic:hover{background:var(--green);color:#fff}
+.mic.on{background:var(--red);color:#fff;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+
+/* Chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:8px 14px;border-radius:20px;
+  border:1.5px solid var(--border);background:#fff;
+  color:var(--text);font-size:.9rem;cursor:pointer;
+  font-family:inherit;font-weight:600;transition:all .15s
+}
+.chip:hover{border-color:var(--green)}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+
+/* Report list item */
+.ri{padding:13px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s;display:flex;align-items:center;gap:12px}
+.ri:last-child{border-bottom:none}
+.ri:hover{background:#f8fafc}
+.ri-main{flex:1;min-width:0}
+.ri-name{font-weight:700;font-size:.98rem}
+.ri-sub{font-size:.82rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ri-date{font-size:.8rem;color:var(--muted);text-align:right;white-space:nowrap;flex-shrink:0}
+
+/* Search */
+.search-wrap{padding:10px 16px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:56px;z-index:50;position:relative}
+.search-ico{position:absolute;left:28px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.search-fi{width:100%;padding:10px 14px 10px 36px;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;font-family:inherit}
+.search-fi:focus{outline:none;border-color:var(--green)}
+
+/* Badge */
+.badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:.75rem;font-weight:700}
+.b-grn{background:var(--pgreen);color:var(--dgreen)}
+.b-amb{background:#fef3c7;color:#92400e}
+.b-gry{background:#f1f5f9;color:var(--muted)}
+
+/* Detail rows */
+.drow{display:flex;padding:7px 0;border-bottom:1px solid var(--border);font-size:.93rem}
+.drow:last-child{border-bottom:none}
+.dlbl{color:var(--muted);width:110px;flex-shrink:0;font-size:.87rem}
+.dval{font-weight:600;flex:1;word-break:break-word}
+
+/* FAB */
+.fab{position:fixed;bottom:24px;right:20px;width:56px;height:56px;border-radius:50%;font-size:1.6rem;padding:0;box-shadow:0 4px 14px rgba(22,163,74,.45)}
+
+/* Empty */
+.empty{text-align:center;padding:48px 24px;color:var(--muted)}
+.empty .ei{font-size:3rem;margin-bottom:10px}
+
+/* Toast */
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1e293b;color:#fff;padding:12px 20px;border-radius:8px;
+  font-size:.9rem;font-weight:600;z-index:9999;transition:transform .3s;
+  pointer-events:none;white-space:nowrap;max-width:calc(100vw - 32px);text-align:center
+}
+#toast.show{transform:translateX(-50%) translateY(0)}
+
+/* Spinner */
+.loading{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--muted);gap:10px}
+.spin{width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* Modal */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:500;align-items:center;justify-content:center;padding:16px}
+.modal-ov.active{display:flex}
+.modal-box{background:#fff;border-radius:var(--r);padding:24px;width:100%;max-width:360px}
+.modal-box h3{font-size:1.05rem;font-weight:700;margin-bottom:10px}
+.modal-box p{color:var(--muted);font-size:.9rem;margin-bottom:18px;line-height:1.6;white-space:pre-line}
+.modal-act{display:flex;gap:10px;justify-content:flex-end}
+
+/* Setup */
+#view-setup{display:flex;align-items:flex-start;justify-content:center;padding:24px;padding-top:40px;background:var(--bg)}
+.setup-card{width:100%;max-width:500px;background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:28px}
+.step{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start}
+.sn{width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.st h3{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.st p{font-size:.83rem;color:var(--muted);line-height:1.6}
+.st a{color:var(--green)}
+.sql-box{background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:10px;margin-top:8px;font-size:.72rem;font-family:monospace;color:#334155;white-space:pre;overflow-x:auto;line-height:1.5}
+.setup-hr{border:none;border-top:1px solid var(--border);margin:20px 0}
+
+/* Login */
+#view-login.active{display:flex;align-items:center;justify-content:center;padding:24px;min-height:100vh}
+.login-card{width:100%;max-width:360px;background:#fff;border-radius:var(--r);box-shadow:var(--sh);padding:32px}
+
+/* Sign view */
+#view-sign{background:#fff;min-height:100vh}
+#signature-pad{touch-action:none;display:block;background:#fafafa;cursor:crosshair}
+
+@media(min-width:600px){.body{padding:24px}}
+</style>
+</head>
+<body>
+
+<!-- ════════════ SETUP ════════════ -->
+<div id="view-setup" class="view">
+<div class="setup-card">
+  <div style="text-align:center;margin-bottom:24px">
+    <div style="font-size:2.5rem">🐦</div>
+    <h2 style="font-size:1.2rem;font-weight:700;color:var(--dgreen);margin-top:8px">作業報告書アプリ</h2>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:4px">三和テック株式会社　初回設定</p>
+  </div>
+
+  <div class="step">
+    <div class="sn">1</div>
+    <div class="st">
+      <h3>Supabaseに登録（無料）</h3>
+      <p><a href="https://supabase.com" target="_blank">supabase.com</a> にアクセスして「Start your project」→ 無料アカウントを作成します。</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sn">2</div>
+    <div class="st">
+      <h3>新しいプロジェクトを作成</h3>
+      <p>「New project」→ プロジェクト名（例: sanwa-report）を入力 → 「Create new project」をクリック。</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sn">3</div>
+    <div class="st">
+      <h3>SQLを実行してテーブルを作成</h3>
+      <p>左メニューの「SQL Editor」→「New query」を開いて、以下をコピー＆貼り付けして「Run」を押します。</p>
+      <div class="sql-box" id="sql-text">create table reports (
+  id uuid default gen_random_uuid() primary key,
+  created_at timestamptz default now(),
+  report_date date not null default current_date,
+  technician_name text default '',
+  customer_name text default '',
+  customer_address text default '',
+  customer_phone text default '',
+  pest_types jsonb default '[]',
+  pest_other text default '',
+  work_types jsonb default '[]',
+  work_other text default '',
+  warranty_period text default 'なし',
+  warranty_start date,
+  warranty_end date,
+  notes text default '',
+  signature_data text default '',
+  signed_at timestamptz,
+  share_token uuid default gen_random_uuid(),
+  created_by uuid references auth.users(id)
+);
+alter table reports enable row level security;
+create policy "auth_all" on reports for all
+  to authenticated using (true) with check (true);
+create policy "anon_read" on reports for select
+  to anon using (true);</div>
+      <button class="btn btn-s btn-sm" onclick="copySQL()" style="margin-top:8px">📋 SQLをコピー</button>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sn">4</div>
+    <div class="st">
+      <h3>スタッフアカウントを作成</h3>
+      <p>左メニュー「Authentication」→「Users」→「Invite user」→ スタッフのメールアドレスを入力して招待（3名分繰り返す）。招待メールのリンクからパスワードを設定します。</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="sn">5</div>
+    <div class="st">
+      <h3>APIキーを貼り付ける</h3>
+      <p>左メニュー「Project Settings」→「API」→「Project URL」と「anon public」キーをコピーして下に入力します。</p>
+    </div>
+  </div>
+
+  <hr class="setup-hr">
+
+  <div class="fg">
+    <label class="fl">Project URL</label>
+    <input class="fi" id="setup-url" type="url" value="https://baxnzuhuosgartnjjdaq.supabase.co">
+  </div>
+  <div class="fg">
+    <label class="fl">Anon Public Key</label>
+    <input class="fi" id="setup-key" type="text" placeholder="eyJhbGci…">
+  </div>
+  <button class="btn btn-p btn-lg btn-blk" onclick="saveSetup()">設定を保存して始める</button>
+  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-top:10px">設定はこの端末に保存されます</p>
+</div>
+</div>
+
+<!-- ════════════ LOGIN ════════════ -->
+<div id="view-login" class="view">
+<div class="login-card">
+  <div style="text-align:center;margin-bottom:28px">
+    <div style="font-size:3rem">🐦</div>
+    <h2 style="font-size:1.15rem;font-weight:700;color:var(--dgreen);margin-top:8px">三和テック<br>作業報告書</h2>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:6px">スタッフログイン</p>
+  </div>
+  <div class="fg">
+    <label class="fl req">メールアドレス</label>
+    <input class="fi" id="l-email" type="email" placeholder="staff@example.com" autocomplete="email" value="masaya.harada1230@gmail.com">
+  </div>
+  <div class="fg">
+    <label class="fl req">パスワード</label>
+    <input class="fi" id="l-pw" type="password" placeholder="••••••••" autocomplete="current-password">
+  </div>
+  <div id="l-err" style="color:var(--red);font-size:.85rem;margin-bottom:12px;display:none"></div>
+  <button class="btn btn-p btn-lg btn-blk" id="l-btn" onclick="doLogin()">ログイン</button>
+  <div style="text-align:center;margin-top:14px">
+    <button onclick="showView('setup')" style="background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-family:inherit">設定を変更する</button>
+  </div>
+</div>
+</div>
+
+<!-- ════════════ DASHBOARD ════════════ -->
+<div id="view-dashboard" class="view">
+<div class="topbar">
+  <h1>📋 作業報告書</h1>
+  <div class="tb-act">
+    <button class="btn btn-g btn-sm" onclick="openNewForm()">＋ 新規</button>
+    <button class="btn btn-g btn-sm" onclick="doLogout()">ログアウト</button>
+  </div>
+</div>
+<div class="search-wrap">
+  <span class="search-ico">🔍</span>
+  <input class="search-fi" id="search-fi" type="text" placeholder="お客様名・住所・害獣で検索…" oninput="filterReports()">
+</div>
+<div class="body" style="padding-top:8px">
+  <div id="rlist" class="card">
+    <div class="loading"><div class="spin"></div>読み込み中…</div>
+  </div>
+</div>
+<button class="btn btn-p fab" onclick="openNewForm()">＋</button>
+</div>
+
+<!-- ════════════ DETAIL ════════════ -->
+<div id="view-detail" class="view">
+<div class="topbar">
+  <h1>報告書詳細</h1>
+  <div class="tb-act">
+    <button class="btn btn-g btn-sm" onclick="showView('dashboard')">← 一覧</button>
+  </div>
+</div>
+<div id="detail-body" class="body"></div>
+</div>
+
+<!-- ════════════ FORM ════════════ -->
+<div id="view-form" class="view">
+<div class="topbar">
+  <h1 id="form-title">新規報告書</h1>
+  <div class="tb-act">
+    <button class="btn btn-g btn-sm" id="form-back-btn" onclick="formBack()">← 戻る</button>
+  </div>
+</div>
+<div class="body">
+
+  <div class="card">
+    <div class="ch">📅 基本情報</div>
+    <div class="cb">
+      <div class="fg">
+        <label class="fl req">作業日</label>
+        <input class="fi" id="f-date" type="date" onchange="updateWarrantyDisplay()">
+      </div>
+      <div class="fg">
+        <label class="fl req">担当者名</label>
+        <input class="fi" id="f-tech" type="text" placeholder="例：田中">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">👤 お客様情報</div>
+    <div class="cb">
+      <div class="fg">
+        <label class="fl req">お客様名</label>
+        <div class="fi-row">
+          <input class="fi" id="f-cname" type="text" placeholder="例：田中 太郎 様">
+          <button class="mic" id="mic-cname" onclick="startVoice('f-cname','mic-cname')">🎤</button>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">ご住所</label>
+        <div class="fi-row">
+          <input class="fi" id="f-addr" type="text" placeholder="例：大阪府大阪市北区…">
+          <button class="mic" id="mic-addr" onclick="startVoice('f-addr','mic-addr')">🎤</button>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">電話番号</label>
+        <input class="fi" id="f-phone" type="tel" placeholder="例：06-1234-5678">
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">🐾 対象害鳥・害獣</div>
+    <div class="cb">
+      <div class="fg">
+        <div class="chips" id="pest-chips">
+          <button class="chip" data-val="鳩" onclick="toggleChip(this,'pest')">🐦 鳩</button>
+          <button class="chip" data-val="ネズミ" onclick="toggleChip(this,'pest')">🐀 ネズミ</button>
+          <button class="chip" data-val="イタチ" onclick="toggleChip(this,'pest')">🦦 イタチ</button>
+          <button class="chip" data-val="ハクビシン" onclick="toggleChip(this,'pest')">🦝 ハクビシン</button>
+          <button class="chip" data-val="アライグマ" onclick="toggleChip(this,'pest')">🦝 アライグマ</button>
+          <button class="chip" data-val="カラス" onclick="toggleChip(this,'pest')">🐦 カラス</button>
+          <button class="chip" data-val="ゴキブリ" onclick="toggleChip(this,'pest')">🪳 ゴキブリ</button>
+          <button class="chip" data-val="ハチ" onclick="toggleChip(this,'pest')">🐝 ハチ</button>
+          <button class="chip" data-val="アリ" onclick="toggleChip(this,'pest')">🐜 アリ</button>
+          <button class="chip" data-val="その他" onclick="toggleChip(this,'pest')">その他</button>
+        </div>
+      </div>
+      <div class="fg" id="pest-other-row" style="display:none">
+        <label class="fl">その他（自由入力）</label>
+        <div class="fi-row">
+          <input class="fi" id="f-pest-other" type="text" placeholder="害獣・害虫名を入力">
+          <button class="mic" id="mic-pestother" onclick="startVoice('f-pest-other','mic-pestother')">🎤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">🔧 作業内容</div>
+    <div class="cb">
+      <div class="fg">
+        <div class="chips" id="work-chips">
+          <button class="chip" data-val="調査・点検" onclick="toggleChip(this,'work')">🔍 調査・点検</button>
+          <button class="chip" data-val="薬剤散布" onclick="toggleChip(this,'work')">💊 薬剤散布</button>
+          <button class="chip" data-val="罠設置" onclick="toggleChip(this,'work')">🪤 罠設置</button>
+          <button class="chip" data-val="侵入口閉塞" onclick="toggleChip(this,'work')">🚫 侵入口閉塞</button>
+          <button class="chip" data-val="防鳥ネット設置" onclick="toggleChip(this,'work')">🕸️ 防鳥ネット設置</button>
+          <button class="chip" data-val="忌避剤設置" onclick="toggleChip(this,'work')">🧪 忌避剤設置</button>
+          <button class="chip" data-val="清掃" onclick="toggleChip(this,'work')">🧹 清掃</button>
+          <button class="chip" data-val="その他" onclick="toggleChip(this,'work')">その他</button>
+        </div>
+      </div>
+      <div class="fg" id="work-other-row" style="display:none">
+        <label class="fl">その他（自由入力）</label>
+        <div class="fi-row">
+          <input class="fi" id="f-work-other" type="text" placeholder="作業内容を入力">
+          <button class="mic" id="mic-workother" onclick="startVoice('f-work-other','mic-workother')">🎤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">🛡️ 保証期間</div>
+    <div class="cb">
+      <div class="fg">
+        <label class="fl">保証期間</label>
+        <select class="fs" id="f-warranty" onchange="updateWarrantyDisplay()">
+          <option value="なし">なし</option>
+          <option value="1ヶ月">1ヶ月</option>
+          <option value="3ヶ月">3ヶ月</option>
+          <option value="6ヶ月">6ヶ月</option>
+          <option value="1年">1年</option>
+          <option value="2年">2年</option>
+        </select>
+      </div>
+      <div id="warranty-info" style="display:none;font-size:.9rem;color:var(--muted);padding:6px 0">
+        開始：<strong id="w-start"></strong>　→　終了：<strong id="w-end" style="color:var(--dgreen)"></strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">📝 特記事項</div>
+    <div class="cb">
+      <div class="fg" style="margin-bottom:0">
+        <div class="fi-row" style="align-items:flex-start">
+          <textarea class="fta" id="f-notes" placeholder="特記事項があれば入力してください…" rows="4"></textarea>
+          <button class="mic" id="mic-notes" onclick="startVoice('f-notes','mic-notes',true)">🎤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="ch">✍️ お客様サイン</div>
+    <div class="cb">
+      <div id="sign-preview-wrap" style="display:none;margin-bottom:12px">
+        <img id="sign-preview" style="max-width:200px;border:1px solid var(--border);border-radius:8px;padding:8px;display:block">
+        <div id="sign-ts" style="font-size:.8rem;color:var(--muted);margin-top:4px"></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn btn-a" onclick="openSign()">✍️ お客様にサインしてもらう</button>
+        <button class="btn btn-s btn-sm" id="clear-sign-btn" onclick="clearSign()" style="display:none">✕ サインを消去</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px">
+    <button class="btn btn-p btn-lg" style="flex:1" onclick="saveReport()">💾 保存する</button>
+    <button class="btn btn-s btn-lg" onclick="formBack()">キャンセル</button>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ SIGN ════════════ -->
+<div id="view-sign" class="view">
+<div style="background:var(--dgreen);color:#fff;padding:16px;text-align:center;flex-shrink:0">
+  <div style="font-size:1.05rem;font-weight:700">✍️ お客様サイン欄</div>
+  <div style="font-size:.85rem;opacity:.85;margin-top:3px" id="sign-for-name"></div>
+</div>
+<div style="padding:12px 16px;text-align:center;color:var(--muted);font-size:.9rem;flex-shrink:0">
+  枠内にサインしてください
+</div>
+<div style="flex:1;display:flex;align-items:center;justify-content:center;padding:12px;overflow:hidden">
+  <canvas id="signature-pad" style="border:2px dashed var(--border);border-radius:12px;max-width:100%;max-height:100%"></canvas>
+</div>
+<div style="padding:14px 16px;display:flex;gap:10px;border-top:1px solid var(--border);flex-shrink:0">
+  <button class="btn btn-s" onclick="clearSignPad()">クリア</button>
+  <button class="btn btn-p" style="flex:1" onclick="confirmSign()">✅ サイン完了</button>
+  <button class="btn btn-s" onclick="cancelSign()">キャンセル</button>
+</div>
+</div>
+
+<!-- ════════════ CUSTOMER VIEW ════════════ -->
+<div id="view-customer" class="view">
+<div class="topbar">
+  <h1>📋 作業報告書</h1>
+  <div class="tb-act">
+    <button class="btn btn-g btn-sm" onclick="printReport(currentReport)">🖨️ 印刷/PDF</button>
+  </div>
+</div>
+<div id="customer-body" class="body">
+  <div class="loading"><div class="spin"></div>読み込み中…</div>
+</div>
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal-ov">
+<div class="modal-box">
+  <h3 id="m-title"></h3>
+  <p id="m-body"></p>
+  <div class="modal-act" id="m-act"></div>
+</div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<script>
+// ══════════════════════════════════════
+// STATE
+// ══════════════════════════════════════
+let sb = null;
+let allReports = [];
+let currentReport = null;
+let editingId = null;
+let signPad = null;
+let tempSign = null;   // { data, ts } while on form
+let activeRecog = null;
+let activeMicBtn = null;
+
+// ══════════════════════════════════════
+// BOOT
+// ══════════════════════════════════════
+async function boot() {
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
+
+  const url = localStorage.getItem('sb_url');
+  const key = localStorage.getItem('sb_key');
+
+  if (!url || !key) { showView('setup'); return; }
+
+  sb = window.supabase.createClient(url, key);
+
+  if (token) {
+    await loadCustomerView(token);
+    return;
+  }
+
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    await loadDashboard();
+    showView('dashboard');
+    return;
+  }
+  // 自動ログイン
+  const autoEmail = localStorage.getItem('auto_email');
+  const autoPw = localStorage.getItem('auto_pw');
+  if (autoEmail && autoPw) {
+    const { error } = await sb.auth.signInWithPassword({ email: autoEmail, password: autoPw });
+    if (!error) {
+      await loadDashboard();
+      showView('dashboard');
+      return;
+    }
+  }
+  showView('login');
+}
+
+// ══════════════════════════════════════
+// VIEWS
+// ══════════════════════════════════════
+function showView(name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ══════════════════════════════════════
+// SETUP
+// ══════════════════════════════════════
+function copySQL() {
+  navigator.clipboard.writeText(document.getElementById('sql-text').textContent.trim())
+    .then(() => toast('SQLをコピーしました ✓'));
+}
+
+function saveSetup() {
+  const url = document.getElementById('setup-url').value.trim();
+  const key = document.getElementById('setup-key').value.trim();
+  if (!url || !key) { toast('URLとキーを入力してください'); return; }
+  localStorage.setItem('sb_url', url);
+  localStorage.setItem('sb_key', key);
+  sb = window.supabase.createClient(url, key);
+  showView('login');
+  toast('設定を保存しました');
+}
+
+// ══════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════
+async function doLogin() {
+  if (!sb) {
+    const url = localStorage.getItem('sb_url');
+    const key = localStorage.getItem('sb_key');
+    if (url && key) sb = window.supabase.createClient(url, key);
+    else { toast('設定が見つかりません。設定を変更するを押してください。'); return; }
+  }
+  const email = document.getElementById('l-email').value.trim();
+  const pw = document.getElementById('l-pw').value;
+  const btn = document.getElementById('l-btn');
+  const err = document.getElementById('l-err');
+  if (!email || !pw) { err.textContent = 'メールとパスワードを入力してください'; err.style.display = 'block'; return; }
+  btn.textContent = 'ログイン中…'; btn.disabled = true; err.style.display = 'none';
+
+  try {
+    const { data, error } = await sb.auth.signInWithPassword({ email, password: pw });
+    btn.textContent = 'ログイン'; btn.disabled = false;
+    if (error) {
+      err.textContent = 'エラー: ' + error.message;
+      err.style.display = 'block';
+      return;
+    }
+    localStorage.setItem('auto_email', email);
+    localStorage.setItem('auto_pw', pw);
+    await loadDashboard();
+    showView('dashboard');
+  } catch (e) {
+    btn.textContent = 'ログイン'; btn.disabled = false;
+    err.textContent = 'エラー: ' + (e.message || '不明なエラー');
+    err.style.display = 'block';
+  }
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  localStorage.removeItem('auto_email');
+  localStorage.removeItem('auto_pw');
+  showView('login');
+}
+
+// ══════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════
+async function loadDashboard() {
+  document.getElementById('rlist').innerHTML = '<div class="loading"><div class="spin"></div>読み込み中…</div>';
+  const { data, error } = await sb.from('reports').select('*')
+    .order('report_date', { ascending: false })
+    .order('created_at', { ascending: false });
+  if (error) { document.getElementById('rlist').innerHTML = '<div class="empty"><div class="ei">⚠️</div><p>読み込みに失敗しました</p></div>'; return; }
+  allReports = data || [];
+  renderList(allReports);
+}
+
+function renderList(list) {
+  const el = document.getElementById('rlist');
+  if (!list.length) {
+    el.innerHTML = '<div class="empty"><div class="ei">📋</div><p>報告書がありません<br>右下の ＋ から作成してください</p></div>';
+    return;
+  }
+  el.innerHTML = list.map(r => {
+    const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
+    const signed = r.signature_data
+      ? '<span class="badge b-grn">✓ サイン済</span>'
+      : '<span class="badge b-gry">未サイン</span>';
+    const d = r.report_date ? r.report_date.replace(/-/g,'/') : '—';
+    return `<div class="ri" onclick="openDetail('${r.id}')">
+      <div style="font-size:1.4rem">📋</div>
+      <div class="ri-main">
+        <div class="ri-name">${esc(r.customer_name||'（名前なし）')} ${signed}</div>
+        <div class="ri-sub">${esc(pests)}</div>
+      </div>
+      <div class="ri-date">${d}<br><span style="font-size:.72rem">${esc(r.technician_name||'')}</span></div>
+    </div>`;
+  }).join('');
+}
+
+function filterReports() {
+  const q = document.getElementById('search-fi').value.toLowerCase();
+  if (!q) { renderList(allReports); return; }
+  renderList(allReports.filter(r => {
+    const hay = [r.customer_name, r.customer_address, r.technician_name, r.notes,
+      ...(r.pest_types||[]), r.pest_other, ...(r.work_types||[])].join(' ').toLowerCase();
+    return hay.includes(q);
+  }));
+}
+
+// ══════════════════════════════════════
+// DETAIL
+// ══════════════════════════════════════
+function openDetail(id) {
+  const r = allReports.find(x => x.id === id);
+  if (!r) return;
+  currentReport = r;
+  editingId = id;
+
+  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
+  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('・') || '—';
+  const dateStr = fmtDate(r.report_date);
+  const wLine = r.warranty_period === 'なし'
+    ? 'なし'
+    : `${r.warranty_period}（${fmtDate(r.warranty_start)} ～ ${fmtDate(r.warranty_end)}）`;
+  const signed = r.signature_data
+    ? '<span class="badge b-grn">✓ サイン済</span>'
+    : '<span class="badge b-amb">未サイン</span>';
+  const shareUrl = `${location.origin}${location.pathname}?token=${r.share_token}`;
+
+  document.getElementById('detail-body').innerHTML = `
+    <div class="card">
+      <div class="ch" style="justify-content:space-between">
+        <span>${esc(r.customer_name||'（名前なし）')}</span>${signed}
+      </div>
+      <div class="cb">
+        ${drow('作業日', dateStr)}
+        ${drow('担当者', r.technician_name||'—')}
+        ${drow('お客様名', r.customer_name||'—')}
+        ${drow('ご住所', r.customer_address||'—')}
+        ${r.customer_phone ? drow('電話番号', r.customer_phone) : ''}
+        ${drow('対象害鳥・害獣', pests)}
+        ${drow('作業内容', works)}
+        ${drow('保証期間', wLine)}
+        ${r.notes ? drow('特記事項', esc(r.notes).replace(/\n/g,'<br>')) : ''}
+        ${r.signature_data ? `<div style="margin-top:12px">
+          <div style="font-size:.8rem;color:var(--muted);margin-bottom:6px">お客様サイン</div>
+          <img src="${r.signature_data}" style="max-width:180px;border:1px solid var(--border);border-radius:8px;padding:8px">
+          ${r.signed_at ? `<div style="font-size:.78rem;color:var(--muted);margin-top:4px">${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
+        </div>` : ''}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ch">📤 共有・出力</div>
+      <div class="cb" style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn btn-p btn-blk" onclick="printReport(allReports.find(x=>x.id==='${r.id}'))">🖨️ 印刷 / PDF保存</button>
+        <button class="btn btn-s btn-blk" onclick="copyLink('${shareUrl}')">🔗 共有リンクをコピー</button>
+        <a class="btn btn-s btn-blk" href="mailto:?subject=${encodeURIComponent('作業報告書（'+r.customer_name+'様）')}&body=${encodeURIComponent('三和テックの作業報告書はこちらからご確認いただけます。\n\n'+shareUrl)}">✉️ メールで送る</a>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-bottom:32px">
+      <button class="btn btn-s" style="flex:1" onclick="openEditForm()">✏️ 編集する</button>
+      <button class="btn btn-r btn-sm" onclick="confirmDelete('${r.id}')">🗑️ 削除</button>
+    </div>
+  `;
+  showView('detail');
+}
+
+function drow(label, val) {
+  return `<div class="drow"><span class="dlbl">${label}</span><span class="dval">${val}</span></div>`;
+}
+
+// ══════════════════════════════════════
+// FORM
+// ══════════════════════════════════════
+function openNewForm() {
+  editingId = null;
+  currentReport = null;
+  tempSign = null;
+  document.getElementById('form-title').textContent = '新規報告書';
+  resetForm();
+  showView('form');
+}
+
+function openEditForm() {
+  const r = currentReport;
+  if (!r) return;
+  document.getElementById('form-title').textContent = '報告書を編集';
+
+  document.getElementById('f-date').value = r.report_date || '';
+  document.getElementById('f-tech').value = r.technician_name || '';
+  document.getElementById('f-cname').value = r.customer_name || '';
+  document.getElementById('f-addr').value = r.customer_address || '';
+  document.getElementById('f-phone').value = r.customer_phone || '';
+  document.getElementById('f-pest-other').value = r.pest_other || '';
+  document.getElementById('f-work-other').value = r.work_other || '';
+  document.getElementById('f-notes').value = r.notes || '';
+  document.getElementById('f-warranty').value = r.warranty_period || 'なし';
+
+  document.querySelectorAll('#pest-chips .chip').forEach(c =>
+    c.classList.toggle('on', (r.pest_types||[]).includes(c.dataset.val)));
+  document.querySelectorAll('#work-chips .chip').forEach(c =>
+    c.classList.toggle('on', (r.work_types||[]).includes(c.dataset.val)));
+
+  document.getElementById('pest-other-row').style.display =
+    (r.pest_types||[]).includes('その他') ? 'block' : 'none';
+  document.getElementById('work-other-row').style.display =
+    (r.work_types||[]).includes('その他') ? 'block' : 'none';
+
+  if (r.signature_data) {
+    tempSign = { data: r.signature_data, ts: r.signed_at };
+    document.getElementById('sign-preview').src = r.signature_data;
+    document.getElementById('sign-preview-wrap').style.display = 'block';
+    document.getElementById('clear-sign-btn').style.display = 'inline-flex';
+    document.getElementById('sign-ts').textContent = r.signed_at
+      ? 'サイン日時: ' + new Date(r.signed_at).toLocaleString('ja-JP') : '';
+  } else {
+    tempSign = null;
+    document.getElementById('sign-preview-wrap').style.display = 'none';
+    document.getElementById('clear-sign-btn').style.display = 'none';
+  }
+
+  updateWarrantyDisplay();
+  showView('form');
+}
+
+function resetForm() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('f-date').value = today;
+  document.getElementById('f-tech').value = localStorage.getItem('last_tech') || '';
+  document.getElementById('f-cname').value = '';
+  document.getElementById('f-addr').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-pest-other').value = '';
+  document.getElementById('f-work-other').value = '';
+  document.getElementById('f-notes').value = '';
+  document.getElementById('f-warranty').value = 'なし';
+  document.querySelectorAll('#pest-chips .chip, #work-chips .chip').forEach(c => c.classList.remove('on'));
+  document.getElementById('pest-other-row').style.display = 'none';
+  document.getElementById('work-other-row').style.display = 'none';
+  document.getElementById('sign-preview-wrap').style.display = 'none';
+  document.getElementById('clear-sign-btn').style.display = 'none';
+  document.getElementById('warranty-info').style.display = 'none';
+  updateWarrantyDisplay();
+}
+
+function formBack() {
+  if (editingId) { showView('detail'); } else { showView('dashboard'); }
+}
+
+// ══════════════════════════════════════
+// CHIPS
+// ══════════════════════════════════════
+function toggleChip(el, group) {
+  el.classList.toggle('on');
+  const hasOther = !!document.querySelector(`#${group}-chips .chip.on[data-val="その他"]`);
+  document.getElementById(`${group}-other-row`).style.display = hasOther ? 'block' : 'none';
+}
+
+function getChips(containerId) {
+  return [...document.querySelectorAll(`#${containerId} .chip.on`)].map(c => c.dataset.val);
+}
+
+// ══════════════════════════════════════
+// WARRANTY
+// ══════════════════════════════════════
+function updateWarrantyDisplay() {
+  const val = document.getElementById('f-warranty').value;
+  const info = document.getElementById('warranty-info');
+  if (val === 'なし') { info.style.display = 'none'; return; }
+  const startStr = document.getElementById('f-date').value;
+  if (!startStr) { info.style.display = 'none'; return; }
+  const endStr = calcWarrantyEnd(startStr, val);
+  document.getElementById('w-start').textContent = fmtDate(startStr);
+  document.getElementById('w-end').textContent = fmtDate(endStr);
+  info.style.display = 'block';
+}
+
+function calcWarrantyEnd(startStr, val) {
+  if (val === 'なし' || !startStr) return null;
+  const d = new Date(startStr);
+  if (val === '1ヶ月') d.setMonth(d.getMonth() + 1);
+  else if (val === '3ヶ月') d.setMonth(d.getMonth() + 3);
+  else if (val === '6ヶ月') d.setMonth(d.getMonth() + 6);
+  else if (val === '1年') d.setFullYear(d.getFullYear() + 1);
+  else if (val === '2年') d.setFullYear(d.getFullYear() + 2);
+  return d.toISOString().split('T')[0];
+}
+
+// ══════════════════════════════════════
+// SIGNATURE
+// ══════════════════════════════════════
+function openSign() {
+  const cname = document.getElementById('f-cname').value || 'お客様';
+  document.getElementById('sign-for-name').textContent = cname + ' 様';
+  showView('sign');
+  requestAnimationFrame(() => {
+    const canvas = document.getElementById('signature-pad');
+    const wrap = canvas.parentElement;
+    const w = Math.min(wrap.offsetWidth - 24, 600);
+    const h = Math.min(wrap.offsetHeight - 24, 280);
+    canvas.width = w;
+    canvas.height = h > 150 ? h : 220;
+    if (signPad) signPad.off();
+    signPad = new SignaturePad(canvas, { minWidth: 1.5, maxWidth: 3.5, penColor: '#1e293b' });
+  });
+}
+
+function clearSignPad() { if (signPad) signPad.clear(); }
+
+function confirmSign() {
+  if (!signPad || signPad.isEmpty()) { toast('サインしてください'); return; }
+  tempSign = { data: signPad.toDataURL('image/png'), ts: new Date().toISOString() };
+  document.getElementById('sign-preview').src = tempSign.data;
+  document.getElementById('sign-preview-wrap').style.display = 'block';
+  document.getElementById('clear-sign-btn').style.display = 'inline-flex';
+  document.getElementById('sign-ts').textContent = 'サイン日時: ' + new Date(tempSign.ts).toLocaleString('ja-JP');
+  showView('form');
+  toast('サインを保存しました ✓');
+}
+
+function cancelSign() { showView('form'); }
+
+function clearSign() {
+  tempSign = null;
+  document.getElementById('sign-preview-wrap').style.display = 'none';
+  document.getElementById('clear-sign-btn').style.display = 'none';
+}
+
+// ══════════════════════════════════════
+// SAVE / DELETE
+// ══════════════════════════════════════
+async function saveReport() {
+  const date = document.getElementById('f-date').value;
+  const cname = document.getElementById('f-cname').value.trim();
+  if (!date) { toast('作業日を入力してください'); return; }
+  if (!cname) { toast('お客様名を入力してください'); return; }
+
+  const tech = document.getElementById('f-tech').value.trim();
+  const warranty = document.getElementById('f-warranty').value;
+  const warrantyEnd = calcWarrantyEnd(date, warranty);
+
+  const payload = {
+    report_date: date,
+    technician_name: tech,
+    customer_name: cname,
+    customer_address: document.getElementById('f-addr').value.trim(),
+    customer_phone: document.getElementById('f-phone').value.trim(),
+    pest_types: getChips('pest-chips'),
+    pest_other: document.getElementById('f-pest-other').value.trim(),
+    work_types: getChips('work-chips'),
+    work_other: document.getElementById('f-work-other').value.trim(),
+    warranty_period: warranty,
+    warranty_start: warranty !== 'なし' ? date : null,
+    warranty_end: warrantyEnd,
+    notes: document.getElementById('f-notes').value.trim(),
+    signature_data: tempSign ? tempSign.data : null,
+    signed_at: tempSign ? tempSign.ts : null,
+  };
+
+  if (tech) localStorage.setItem('last_tech', tech);
+
+  let error;
+  if (editingId) {
+    ({ error } = await sb.from('reports').update(payload).eq('id', editingId));
+  } else {
+    ({ error } = await sb.from('reports').insert(payload));
+  }
+
+  if (error) { toast('保存に失敗しました: ' + error.message); return; }
+  toast('保存しました ✓');
+  await loadDashboard();
+  showView('dashboard');
+}
+
+function confirmDelete(id) {
+  showModal('削除の確認', 'この報告書を削除しますか？\n元に戻すことはできません。', [
+    { label: '削除する', cls: 'btn-r', fn: async () => {
+      hideModal();
+      const { error } = await sb.from('reports').delete().eq('id', id);
+      if (error) { toast('削除に失敗しました'); return; }
+      toast('削除しました');
+      await loadDashboard();
+      showView('dashboard');
+    }},
+    { label: 'キャンセル', cls: 'btn-s', fn: hideModal }
+  ]);
+}
+
+// ══════════════════════════════════════
+// CUSTOMER VIEW
+// ══════════════════════════════════════
+async function loadCustomerView(token) {
+  showView('customer');
+  const { data, error } = await sb.from('reports').select('*').eq('share_token', token).single();
+  if (error || !data) {
+    document.getElementById('customer-body').innerHTML = '<div class="empty"><div class="ei">❌</div><p>報告書が見つかりませんでした</p></div>';
+    return;
+  }
+  currentReport = data;
+  renderCustomerBody(data);
+}
+
+function renderCustomerBody(r) {
+  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
+  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('・') || '—';
+  const wLine = r.warranty_period === 'なし'
+    ? 'なし'
+    : `${r.warranty_period}（${fmtDate(r.warranty_start)} ～ ${fmtDate(r.warranty_end)}）`;
+
+  document.getElementById('customer-body').innerHTML = `
+    <div style="text-align:center;margin-bottom:20px;padding:20px;background:#fff;border-radius:var(--r);box-shadow:var(--sh)">
+      <div style="font-size:1.3rem;font-weight:700;color:var(--dgreen)">三和テック株式会社</div>
+      <div style="color:var(--muted);margin-top:4px">作業報告書</div>
+      <div style="font-size:.85rem;color:var(--muted);margin-top:8px">作業日：${fmtDate(r.report_date)}</div>
+    </div>
+    <div class="card">
+      <div class="ch">👤 お客様情報</div>
+      <div class="cb">
+        ${drow('お名前', esc(r.customer_name||'—'))}
+        ${drow('ご住所', esc(r.customer_address||'—'))}
+        ${r.customer_phone ? drow('電話番号', esc(r.customer_phone)) : ''}
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch">🔧 作業内容</div>
+      <div class="cb">
+        ${drow('対象害鳥・害獣', esc(pests))}
+        ${drow('作業種別', esc(works))}
+        ${r.notes ? drow('特記事項', esc(r.notes).replace(/\n/g,'<br>')) : ''}
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch">🛡️ 保証</div>
+      <div class="cb">
+        ${drow('保証期間', wLine)}
+        ${drow('担当者', esc(r.technician_name||'—'))}
+      </div>
+    </div>
+    ${r.signature_data ? `
+    <div class="card">
+      <div class="ch">✍️ お客様サイン</div>
+      <div class="cb">
+        <img src="${r.signature_data}" style="max-width:200px;border:1px solid var(--border);border-radius:8px;padding:8px;display:block">
+        ${r.signed_at ? `<div style="font-size:.8rem;color:var(--muted);margin-top:6px">確認日時: ${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
+      </div>
+    </div>` : ''}
+    <button class="btn btn-p btn-lg btn-blk" onclick="printReport(currentReport)" style="margin-bottom:32px">🖨️ 印刷 / PDFで保存</button>
+  `;
+}
+
+// ══════════════════════════════════════
+// PRINT / PDF
+// ══════════════════════════════════════
+function printReport(r) {
+  if (!r) return;
+  const pests = [...(r.pest_types||[]), r.pest_other].filter(Boolean).join('・') || '—';
+  const works = [...(r.work_types||[]), r.work_other].filter(Boolean).join('・') || '—';
+  const wLine = r.warranty_period === 'なし'
+    ? 'なし'
+    : `${r.warranty_period}（${fmtDate(r.warranty_start)} ～ ${fmtDate(r.warranty_end)}）`;
+  const signBlock = r.signature_data
+    ? `<img src="${r.signature_data}" style="max-width:150px;border:1px solid #ccc;padding:4px;border-radius:4px;display:block;margin-top:4px">`
+    : `<div style="height:60px;border:1px solid #ccc;width:150px;border-radius:4px;margin-top:4px"></div>`;
+
+  const w = window.open('', '_blank');
+  w.document.write(`<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+<title>作業報告書 - ${r.customer_name||''}</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Meiryo','Yu Gothic','Hiragino Kaku Gothic ProN',sans-serif;padding:18mm 20mm;color:#111;font-size:10.5pt;line-height:1.5}
+h1{text-align:center;font-size:15pt;letter-spacing:.1em;color:#166534;margin-bottom:3mm}
+.company{text-align:center;font-size:9pt;color:#555;margin-bottom:8mm}
+.sec{margin-bottom:5mm}
+.sec-title{background:#166534;color:#fff;padding:2mm 4mm;font-size:9.5pt;font-weight:700;margin-bottom:0}
+table{width:100%;border-collapse:collapse}
+th,td{border:1px solid #ccc;padding:2.5mm 4mm;font-size:9.5pt;text-align:left;vertical-align:top}
+th{background:#f0f5f0;font-weight:700;width:32%;color:#166534}
+.bottom{margin-top:8mm;display:flex;justify-content:space-between;align-items:flex-end}
+.sign-box{border:1px solid #ccc;padding:4mm;text-align:center}
+.sign-label{font-size:8.5pt;color:#666;margin-bottom:2mm}
+.footer{margin-top:6mm;text-align:center;font-size:8pt;color:#aaa;border-top:1px solid #eee;padding-top:3mm}
+.no-print{text-align:center;margin-bottom:10mm}
+.no-print button{padding:10px 24px;border:none;border-radius:6px;font-size:13px;cursor:pointer;font-family:inherit;margin:0 4px}
+.prt{background:#166534;color:#fff}
+.cls{background:#eee;color:#333}
+@media print{.no-print{display:none}body{padding:15mm}}
+</style></head><body>
+<div class="no-print">
+  <button class="prt" onclick="window.print()">🖨️ 印刷 / PDF保存</button>
+  <button class="cls" onclick="window.close()">閉じる</button>
+</div>
+<h1>作　業　報　告　書</h1>
+<div class="company">三和テック株式会社　｜　作業日：${fmtDate(r.report_date)}</div>
+<div class="sec">
+  <div class="sec-title">【お客様情報】</div>
+  <table>
+    <tr><th>お客様名</th><td>${esc(r.customer_name||'—')}</td></tr>
+    <tr><th>ご住所</th><td>${esc(r.customer_address||'—')}</td></tr>
+    <tr><th>電話番号</th><td>${esc(r.customer_phone||'—')}</td></tr>
+  </table>
+</div>
+<div class="sec">
+  <div class="sec-title">【作業内容】</div>
+  <table>
+    <tr><th>対象害鳥・害獣</th><td>${esc(pests)}</td></tr>
+    <tr><th>作業種別</th><td>${esc(works)}</td></tr>
+    ${r.notes ? `<tr><th>特記事項</th><td>${esc(r.notes).replace(/\n/g,'<br>')}</td></tr>` : ''}
+  </table>
+</div>
+<div class="sec">
+  <div class="sec-title">【保証】</div>
+  <table>
+    <tr><th>保証期間</th><td>${wLine}</td></tr>
+  </table>
+</div>
+<div class="bottom">
+  <div class="sign-box">
+    <div class="sign-label">お客様確認サイン</div>
+    ${signBlock}
+    ${r.signed_at ? `<div style="font-size:7.5pt;color:#999;margin-top:2mm">${new Date(r.signed_at).toLocaleString('ja-JP')}</div>` : ''}
+  </div>
+  <div style="text-align:right;font-size:9.5pt">
+    <div>担当者：<strong>${esc(r.technician_name||'—')}</strong></div>
+    <div style="font-size:8.5pt;color:#666;margin-top:2mm">三和テック株式会社</div>
+  </div>
+</div>
+<div class="footer">この報告書は三和テック株式会社が発行したものです</div>
+</body></html>`);
+  w.document.close();
+}
+
+// ══════════════════════════════════════
+// VOICE INPUT
+// ══════════════════════════════════════
+function startVoice(fieldId, micId, append = false) {
+  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    toast('音声入力はChromeブラウザのみ対応しています');
+    return;
+  }
+  const micBtn = document.getElementById(micId);
+  if (activeMicBtn === micBtn && activeRecog) {
+    activeRecog.stop();
+    return;
+  }
+  if (activeRecog) { activeRecog.stop(); }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new SR();
+  r.lang = 'ja-JP';
+  r.continuous = false;
+  r.interimResults = false;
+
+  r.onstart = () => {
+    micBtn.classList.add('on'); micBtn.textContent = '⏹️';
+    activeMicBtn = micBtn; activeRecog = r;
+    toast('🎤 話してください…');
+  };
+  r.onresult = (e) => {
+    const text = e.results[0][0].transcript;
+    const field = document.getElementById(fieldId);
+    field.value = (append && field.value) ? field.value + '\n' + text : text;
+  };
+  r.onend = () => {
+    micBtn.classList.remove('on'); micBtn.textContent = '🎤';
+    activeMicBtn = null; activeRecog = null;
+  };
+  r.onerror = () => {
+    micBtn.classList.remove('on'); micBtn.textContent = '🎤';
+    activeMicBtn = null; activeRecog = null;
+    toast('音声認識に失敗しました');
+  };
+  r.start();
+}
+
+// ══════════════════════════════════════
+// SHARE
+// ══════════════════════════════════════
+async function copyLink(url) {
+  try {
+    await navigator.clipboard.writeText(url);
+    toast('リンクをコピーしました ✓');
+  } catch {
+    prompt('以下のリンクをコピーしてください:', url);
+  }
+}
+
+// ══════════════════════════════════════
+// MODAL
+// ══════════════════════════════════════
+function showModal(title, body, actions) {
+  document.getElementById('m-title').textContent = title;
+  document.getElementById('m-body').textContent = body;
+  const act = document.getElementById('m-act');
+  act.innerHTML = '';
+  actions.forEach(a => {
+    const b = document.createElement('button');
+    b.className = 'btn ' + a.cls;
+    b.textContent = a.label;
+    b.onclick = a.fn;
+    act.appendChild(b);
+  });
+  document.getElementById('modal').classList.add('active');
+}
+function hideModal() { document.getElementById('modal').classList.remove('active'); }
+
+// ══════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════
+function toast(msg, ms = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => t.classList.remove('show'), ms);
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  try { return new Date(d + 'T00:00:00').toLocaleDateString('ja-JP', { year:'numeric', month:'long', day:'numeric' }); }
+  catch { return d; }
+}
+
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ══════════════════════════════════════
+// START
+// ══════════════════════════════════════
+boot();
+</script>
+</body>
+</html>
