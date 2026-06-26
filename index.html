@@ -398,37 +398,7 @@ body {
         <label>開始ページ No.</label>
         <input type="number" id="startPage" value="1" min="1">
       </div>
-    </div>
-
-    <div class="s-section">
-      <div class="s-title">共通項目（全写真に自動適用）</div>
-      <div class="fg">
-        <label>駆除種別・対象生物</label>
-        <input id="def_kind" placeholder="例：害虫駆除（ゴキブリ）">
-      </div>
-      <div class="fg">
-        <label>撮影区分</label>
-        <select id="def_phase">
-          <option>作業前</option>
-          <option>作業中</option>
-          <option>作業後</option>
-          <option>調査</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>作業時間帯</label>
-        <input id="def_jikan" placeholder="例：9:00〜12:00">
-      </div>
-      <div class="fg">
-        <label>使用薬剤・資材</label>
-        <input id="def_zairyo" placeholder="例：○○乳剤・粘着トラップ">
-      </div>
-      <div class="fg">
-        <label>施工方法</label>
-        <input id="def_kanri" placeholder="例：ベイト処理・毒餌設置">
-      </div>
-      <div class="fg"><label>撮影日</label><input type="date" id="def_date"></div>
-      <div class="tip">💡 ここの値は新しく追加した写真に自動で入ります。写真ごとに個別変更もできます。</div>
+      <div class="tip">💡 駆除内容・薬剤・撮影日などは、右の写真1枚ずつに入力してください。</div>
     </div>
 
   </div>
@@ -496,19 +466,9 @@ body {
 <script>
 let photos = [];
 
-document.getElementById('def_date').valueAsDate = new Date();
-
 // お客様名をトップバーにリアルタイム表示
 document.getElementById('kojiName').addEventListener('input', function() {
   document.getElementById('topClientName').textContent = this.value ? '｜ ' + this.value : '';
-});
-
-// 撮影日を変更したら全写真に同期
-document.getElementById('def_date').addEventListener('change', function() {
-  const d = this.value;
-  const dateStr = d ? new Date(d).toLocaleDateString('ja-JP') : '';
-  photos.forEach(p => { p.date = dateStr; });
-  render();
 });
 
 // ---- ドラッグ&ドロップ ----
@@ -538,15 +498,13 @@ document.addEventListener('paste', e => {
 });
 
 function getDefaults() {
-  const d = document.getElementById('def_date').value;
   return {
-    kind:   document.getElementById('def_kind').value,
-    phase:  document.getElementById('def_phase').value,
-    jikan:  document.getElementById('def_jikan').value,
-    zairyo: document.getElementById('def_zairyo').value,
-    kanri:  document.getElementById('def_kanri').value,
+    kind:   '',
+    jikan:  '',
+    zairyo: '',
+    kanri:  '',
     biko:   '',
-    date:   d ? new Date(d).toLocaleDateString('ja-JP') : ''
+    date:   new Date().toLocaleDateString('ja-JP')
   };
 }
 
@@ -556,11 +514,6 @@ function loadFiles(files) {
     reader.onload = e => { photos.push({ src: e.target.result, ...getDefaults() }); render(); };
     reader.readAsDataURL(file);
   });
-}
-
-function phaseBadge(phase) {
-  const map = { '作業前':'badge-before', '作業中':'badge-during', '作業後':'badge-after', '調査':'badge-survey' };
-  return `<span class="${map[phase]||'badge-default'}">${h(phase)}</span>`;
 }
 
 function render() {
@@ -575,7 +528,6 @@ function render() {
       <div class="photo-head">
         <div style="display:flex;align-items:center;gap:6px;">
           <span>No.${i+1}</span>
-          ${phaseBadge(p.phase)}
         </div>
         <div class="photo-actions">
           <button class="icon-btn" onclick="move(${i},-1)" ${i===0?'disabled':''} title="上へ">↑</button>
@@ -588,12 +540,6 @@ function render() {
         <div class="fg full">
           <label>📝 所見・メモ</label>
           <textarea oninput="set(${i},'biko',this.value)" placeholder="発生状況・作業内容・特記事項など">${h(p.biko)}</textarea>
-        </div>
-        <div class="fg">
-          <label>撮影区分</label>
-          <select oninput="set(${i},'phase',this.value);render()">
-            ${['作業前','作業中','作業後','調査'].map(v=>`<option ${p.phase===v?'selected':''}>${v}</option>`).join('')}
-          </select>
         </div>
         <div class="fg full"><label>駆除種別・対象生物</label><input value="${h(p.kind)}" oninput="set(${i},'kind',this.value)" placeholder="例：害虫駆除（ゴキブリ）"></div>
         <div class="fg"><label>作業時間帯</label><input value="${h(p.jikan)}" oninput="set(${i},'jikan',this.value)"></div>
@@ -642,7 +588,6 @@ function buildReportHTML() {
       <div class="rpt-row">
         <div class="rpt-photo-cell">
           <img src="${p.src}">
-          ${p.phase ? `<div class="rpt-photo-label">${h(p.phase)}</div>` : ''}
         </div>
         <div class="rpt-info-cell">
           ${[['駆除内容',p.kind],['作業時間帯',p.jikan],['使用薬剤・資材',p.zairyo],['施工方法',p.kanri],['所見・備考',p.biko]]
@@ -667,13 +612,10 @@ function buildShareHTML() {
   const globalSign = document.getElementById('globalSign').value;
   const today = new Date().toLocaleDateString('ja-JP');
 
-  const phaseColor = { '作業前':'#3b82f6','作業中':'#f59e0b','作業後':'#10b981','調査':'#8b5cf6' };
-
   const photoCards = photos.map((p, i) => `
     <div style="background:white;border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.10);margin-bottom:20px;">
       <div style="position:relative;">
         <img src="${p.src}" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
-        ${p.phase ? `<span style="position:absolute;top:8px;left:8px;background:${phaseColor[p.phase]||'#6b7280'};color:white;padding:3px 10px;border-radius:99px;font-size:0.72rem;font-weight:700;">${h(p.phase)}</span>` : ''}
       </div>
       <div style="padding:14px;">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
@@ -744,7 +686,7 @@ async function shareReport() {
 // ===== 自動保存（このパソコンのブラウザに保存） =====
 (function(){
   const STORAGE_KEY = 'genba_photo_report_v1';
-  const fieldIds = ['atena','kojiName','address','globalSign','startPage','def_kind','def_phase','def_jikan','def_zairyo','def_kanri','def_date'];
+  const fieldIds = ['atena','kojiName','address','globalSign','startPage'];
 
   function indicator(text, color){
     const el = document.getElementById('saveIndicator');
@@ -778,7 +720,7 @@ async function shareReport() {
   const _render = render; render = function(){ _render.apply(this, arguments); window.scheduleSave(); };
   const _set = set; set = function(){ _set.apply(this, arguments); window.scheduleSave(); };
 
-  // 基本情報・共通項目の入力でも保存
+  // 基本情報の入力でも保存
   fieldIds.forEach(id => { const el = document.getElementById(id); if(el){ el.addEventListener('input', window.scheduleSave); el.addEventListener('change', window.scheduleSave); } });
 
   // 起動時に前回の内容を復元
